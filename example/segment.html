@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Segment Example</title>
+        <link rel="stylesheet" href="../external/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+        <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.css">
+        <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.filter.css">
+        <link rel="stylesheet" href="../external/automizyjs/dist/automizy.css">
+
+        <script src="../external/jquery/dist/jquery.min.js"></script>
+        <script src="../external/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../external/requirejs/require.js"></script>
+        <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.min.js"></script>
+        <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.filter.js"></script>
+        <script src="../external/automizyjs/dist/automizy.js"></script>
+        <script>
+            $(function () {
+                require([
+                    "../src/automizyapi.js"
+                ], function () {
+                    var dataArea = $A.newInput({
+                        type: 'textarea',
+                        width:'90%',
+                        create:function(module, $widget){
+                            $widget.css({
+                                width:'100%',
+                                boxSizing:'border-box',
+                                margin:0,
+                                textAlign:'center'
+                            })
+                            module.input().css({
+                                height:'200px',
+                                width:'100%'
+                            })
+                        }
+                    });
+                    $A.newForm().addInput(dataArea).addButton({
+                        text: '$AA.segment().getAll()',
+                        id:'getAll',
+                        click: function () {
+                            if (!$AA.token().get()) {
+                                return false;
+                            }
+                            $AA.segment().getAll().done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            });
+                        }
+                    }).break().addInput({
+                        placeholder:'id',
+                        id:'segmentGetRecordById-id',
+                        width:'50px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            $A.getButton('segmentGetRecordById').text('$AA.segment().getRecordById('+module.val()+')').data('recordId', module.val());
+                        }
+                    }).addButton({
+                        text: '$AA.segment().getRecordById(id)',
+                        disable:true,
+                        id:'segmentGetRecordById',
+                        click: function (module, $widget) {
+                            if (!$AA.token().get()) {
+                                return false;
+                            }
+                            $AA.segment().getRecordById(module.data('recordId')).done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            });
+                        }
+                    }).break().addInput({
+                        placeholder:'id',
+                        id:'segmentGetFieldById-id',
+                        width:'50px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            var b =  $A.getButton('segmentGetFieldById');
+                            var fieldName = 'fieldName';
+                            if(typeof b.data('fieldName') !== "undefined")
+                                fieldName = '"'+b.data('fieldName')+'"';
+                            b.text('$AA.segment().getFieldById('+module.val()+', '+fieldName+')').data('recordId', module.val());
+                        }
+                    }).addInput({
+                        placeholder:'fieldName',
+                        id:'segmentGetFieldById-fieldName',
+                        width:'100px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            var b =  $A.getButton('segmentGetFieldById');
+                            var recordId = 'id';
+                            if(typeof b.data('recordId') !== "undefined")
+                                recordId = b.data('recordId');
+                            b.text('$AA.segment().getFieldById('+recordId+', "'+module.val()+'")').data('fieldName', module.val());
+                        }
+                    }).addButton({
+                        text: '$AA.segment().getFieldById(id, fieldName)',
+                        id:'segmentGetFieldById',
+                        click: function (module, $widget) {
+                            if (!$AA.token().get()) {
+                                return false;
+                            }
+                            $AA.segment().getFieldById(module.data('recordId'), module.data('fieldName')).done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            });
+                        }
+                    }).break().addInput({
+                        placeholder:'fieldName',
+                        id:'getAllIdNamePair-fieldName',
+                        width:'100px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            $A.getButton('getAllIdNamePair').text('$AA.segment().getAllIdNamePair("'+module.val()+'")').data('fieldName', module.val());
+                        }
+                    }).addButton({
+                        text: '$AA.segment().getAllIdNamePair(fieldName)',
+                        disable:true,
+                        id:'getAllIdNamePair',
+                        click: function (module, $widget) {
+                            if (!$AA.token().get()) {
+                                return false;
+                            }
+                            $AA.segment().getAllIdNamePair(module.data('fieldName')).done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            });
+                        }
+                    }).draw();
+
+                });
+            });
+        </script>
+    </head>
+    <body></body>
+</html>

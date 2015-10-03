@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Segment Example</title>
+    <link rel="stylesheet" href="../external/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.css">
+    <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.filter.css">
+    <link rel="stylesheet" href="../external/automizyjs/dist/automizy.min.css">
+
+    <script src="../external/jquery/dist/jquery.min.js"></script>
+    <script src="../external/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../external/requirejs/require.js"></script>
+    <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.min.js"></script>
+    <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.filter.js"></script>
+    <script src="../external/automizyjs/dist/automizy.min.js"></script>
+    <script>
+        $(function () {
+            require([
+                "../src/automizyapi.js"
+            ], function () {
+                $A.default.table = {
+                    selectable:true,
+                    perPageList: [1, 5, 10, 50, 100, 1000],
+                    onPageFirst:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPagePrev:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPageNext:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPageLast:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPerPage:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onSort:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onSearch:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onShowCol:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    create:function(table){
+                        $AA.refreshTable(table);
+                    }
+                };
+
+                window.table = $A.newTable({
+                    title:'Newsletters',
+                    id:'newsletters',
+                    perPage:5,
+                    data:{
+                        apiName:'newsletters'
+                    },
+                    cols:[
+                        {name: 'name', text:'Hírlevél neve', hideable:false, order:'asc'},
+                        {name: 'subject', text: 'Hírlevél tárgya', hideable:false},
+                        {name: 'createDate', text: 'Létrehozva'},
+                        {name: 'maxWidth', text: 'Maximális szélesség', visibility:false},
+                        {name: 'backup', text: 'Piszkozat', visibility:false, searchable:false}
+                    ],
+                    buttons:[
+                        {
+                            skin: 'simple-orange',
+                            text: 'New campaign',
+                            click: function () {
+                                openCampaignDialog();
+                            }
+                        },
+                        {
+                            text: 'Edit email',
+                            condition: 'select-one',
+                            disabled:true,
+                            click: function () {
+                                openCampaignDialog({
+                                    isEdit: true,
+                                    id: table.firstCheckedRow().recordId(),
+                                    name: table.firstCheckedRow().data('name'),
+                                    subject: table.firstCheckedRow().data('subject')
+                                });
+                            }
+                        }
+                    ],
+                    inlineButtons:[
+                        {
+                            text: 'edit',
+                            click: function () {
+                                console.log({
+                                    isEdit: true,
+                                    id: table.openedRow().recordId(),
+                                    name: table.openedRow().getCellByColName('name').text(),
+                                    subject: table.openedRow().getCellByColName('subject').text()
+                                });
+                            }
+                        }
+                    ]
+                }).draw();
+            });
+        });
+    </script>
+</head>
+<body></body>
+</html>

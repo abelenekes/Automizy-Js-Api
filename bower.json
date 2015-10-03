@@ -1,0 +1,22 @@
+{
+  "name": "Automizy Js Api",
+  "version": "1.0",
+  "main": "dist/automizy-api.js",
+  "license": "proprietary",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "build",
+    "AUTHORS.txt",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": "2.*",
+    "jquery-ui": "*",
+	"qunit":"*",
+	"requirejs": "https://github.com/jrburke/requirejs.git#master",
+	"jquery-ui-multiselect": "https://github.com/ehynds/jquery-ui-multiselect-widget.git#master",
+    "automizyjs": "https://github.com/Automizy/Automizy-JS.git#master"
+  }
+}

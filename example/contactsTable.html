@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Segment Example</title>
+    <link rel="stylesheet" href="../external/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.css">
+    <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.filter.css">
+    <link rel="stylesheet" href="../external/automizyjs/dist/automizy.min.css">
+
+    <script src="../external/jquery/dist/jquery.min.js"></script>
+    <script src="../external/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../external/requirejs/require.js"></script>
+    <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.min.js"></script>
+    <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.filter.js"></script>
+    <script src="../external/automizyjs/dist/automizy.min.js"></script>
+    <script>
+        $(function () {
+            require([
+                "../src/automizyapi.js"
+            ], function () {
+                $A.default.table = {
+                    selectable:true,
+                    perPageList: [1, 5, 10, 50, 100, 1000],
+                    onPageFirst:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPagePrev:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPageNext:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPageLast:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onPerPage:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onSort:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onSearch:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    onShowCol:function(table){
+                        $AA.refreshTable(table);
+                    },
+                    create:function(table){
+                        $AA.refreshTable(table);
+                    }
+                };
+
+                /*előbb lekérdezem az egyedi mezőket, hoy a tábla oszlopaiba beszúrhassam*/
+                $AA.customFields().fields('name').get().done(function(data) {
+                    var cols = [
+                        {name: 'email', text: $A.translate('Email address'), hideable: false, order: 'asc'},
+                        {name: 'status', text: $A.translate('Status')},
+                        {name: 'confirmDate', text: $A.translate('Confirmation date')},
+                        {name: 'confirmIp', text: $A.translate('Confirmation ip')},
+                        {name: 'requestDate', text: $A.translate('Request date')},
+                        {name: 'requestIp', text: $A.translate('Request ip')},
+                        {name: 'unsubscribeDate', text: $A.translate('Unsubscribe date')},
+                        {name: 'customFields', text: $A.translate('Custom Fields'), hideable: false}
+                    ];
+
+                    var cfs = data._embedded.customFields;
+
+                    for (var i = 0; i < cfs.length; i++) {
+                        cols.push({name: 'customFields.' + cfs[i].name, text: cfs[i].name, sortable: false});
+                    }
+
+
+                    window.table = $A.newTable({
+                        title: 'Complete list of contacts',
+                        id: 'contacts',
+                        perPage: 5,
+                        data: {
+                            apiName: 'contacts',
+                            refreshed: false
+                        },
+                        cols: cols,
+                        buttons: [
+                            {
+                                skin: 'simple-orange',
+                                text: 'New contact',
+                                click: function () {
+
+                                }
+                            },
+                            {
+                                text: $A.translate('Edit contact'),
+                                condition: 'select-one',
+                                disabled: true,
+                                click: function () {
+
+                                }
+                            }
+                        ],
+                        inlineButtons: [
+                            {
+                                text: 'edit',
+                                click: function () {
+
+                                }
+                            }
+                        ]
+                    }).draw();
+                });
+            });
+        });
+    </script>
+</head>
+<body></body>
+</html>

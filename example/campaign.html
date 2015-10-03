@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Campaign Example</title>
+        <link rel="stylesheet" href="../external/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+        <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.css">
+        <link rel="stylesheet" href="../external/jquery-ui-multiselect/jquery.multiselect.filter.css">
+        <link rel="stylesheet" href="../external/automizyjs/src/automizy.css">
+
+        <script src="../external/jquery/dist/jquery.min.js"></script>
+        <script src="../external/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../external/requirejs/require.js"></script>
+        <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.min.js"></script>
+        <script src="../external/jquery-ui-multiselect/src/jquery.multiselect.filter.js"></script>
+        <script>
+            $(function () {
+                requirejs.config({
+                    paths: {
+                        automizy: '../external/automizyjs/src'
+                    }
+                });
+                require([
+                    "automizy/automizy",
+                    "../src/automizyapi.js"
+                ], function ($A, $AA) {
+                    function openLoginDialog() {
+                        if (typeof loginDialog !== 'undefined')
+                            return loginDialog.open();
+                        var loginForm = $A.newForm({
+                            inputs: [
+                                $A.newInput().name('clientId').label('Kliens azonosító').change(function(module){
+                                    var a = module.val().split('/');
+                                    $A.getInput('loginUsername').val(a[0] + '/' + a[2])
+                                }),
+                                $A.newInput().type('hidden').name('username').id('loginUsername'),
+                                $A.newInput().type('password').name('password').label('Api jelszó')
+                            ]
+                        });
+                        window.loginDialog = $A.newDialog().title('Login with your Automizy Api account').hash('Login').content(loginForm).addButton({
+                            skin: 'simple-orange',
+                            text: 'Login',
+                            click: function (module, widget) {
+                                var login = $AA.token().login(loginForm.object());
+                                if (login !== false) {
+                                    loginDialog.close();
+                                }
+                            }
+                        }).draw();
+                        return loginDialog;
+                    }
+
+                    if (!$AA.token().get())
+                        openLoginDialog();
+                    var dataArea = $A.newInput({
+                        type: 'textarea',
+                        width:'90%',
+                        create:function(module, $widget){
+                            $widget.css({
+                                width:'100%',
+                                boxSizing:'border-box',
+                                margin:0,
+                                textAlign:'center'
+                            })
+                            module.input().css({
+                                height:'100px',
+                                width:'100%'
+                            })
+                        }
+                    });
+                    $A.newForm().addInput(dataArea).addButton({
+                        text: '$AA.campaign().getAll()',
+                        click: function () {
+                            if (!$AA.token().get()) {
+                                openLoginDialog();
+                                return false;
+                            }
+                            $AA.campaign().getAll().done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            }).fail(function () {
+                                openLoginDialog();
+                            });
+                        }
+                    }).break().addInput({
+                        placeholder:'id',
+                        width:'50px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            $A.getButton('campaignGetRecordFromId').text('$AA.campaign().getRecordFromId('+module.val()+')').data('recordId', module.val());
+                        }
+                    }).addButton({
+                        text: '$AA.campaign().getRecordFromId(id)',
+                        disable:true,
+                        id:'campaignGetRecordFromId',
+                        click: function (module, $widget) {
+                            if (!$AA.token().get()) {
+                                openLoginDialog();
+                                return false;
+                            }
+                            $AA.campaign().getRecordFromId(module.data('recordId')).done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            }).fail(function () {
+                                openLoginDialog();
+                            });
+                        }
+                    }).break().addInput({
+                        placeholder:'id',
+                        width:'50px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            var b =  $A.getButton('campaignGetFieldFromId');
+                            var fieldName = 'fieldName';
+                            if(typeof b.data('fieldName') !== "undefined")
+                                fieldName = '"'+b.data('fieldName')+'"';
+                            b.text('$AA.campaign().getFieldFromId('+module.val()+', '+fieldName+')').data('recordId', module.val());
+                        }
+                    }).addInput({
+                        placeholder:'fieldName',
+                        width:'100px',
+                        newRow:false,
+                        change:function(module, $widget){
+                            var b =  $A.getButton('campaignGetFieldFromId');
+                            var recordId = 'id';
+                            if(typeof b.data('recordId') !== "undefined")
+                                recordId = b.data('recordId');
+                            b.text('$AA.campaign().getFieldFromId('+recordId+', "'+module.val()+'")').data('fieldName', module.val());
+                        }
+                    }).addButton({
+                        text: '$AA.campaign().getFieldFromId(id, fieldName)',
+                        disable:true,
+                        id:'campaignGetFieldFromId',
+                        click: function (module, $widget) {
+                            if (!$AA.token().get()) {
+                                openLoginDialog();
+                                return false;
+                            }
+                            $AA.campaign().getFieldFromId(module.data('recordId'), module.data('fieldName')).done(function (data) {
+                                dataArea.val(JSON.stringify(data, null, 4));
+                            }).fail(function () {
+                                openLoginDialog();
+                            });
+                        }
+                    }).draw();
+
+                });
+            });
+        </script>
+    </head>
+    <body></body>
+</html>
