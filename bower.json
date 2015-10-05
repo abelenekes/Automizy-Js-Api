@@ -1,9 +1,15 @@
 {
-  "name": "Automizy Js Api",
+  "name": "automizy-js-api",
   "version": "1.0",
-  "main": "dist/automizy-api.js",
-  "license": "proprietary",
-  "private": true,
+  "license": "MIT",
+  "description": "JavaScript API library for Automizy Marketing Automation software",
+  "keywords":[
+    "automizy-js-api",
+    "automizy",
+    "free",
+    "integrate"
+  ],
+  "private": false,
   "ignore": [
     "**/.*",
     "build",
@@ -11,12 +17,23 @@
     "Gruntfile.js",
     "package.json"
   ],
+  "moduleType":[
+    "globals",
+    "amd"
+  ],
+  "main":[
+    "src/automizyapi.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/automizy/automizy-js-api.git"
+  },
   "dependencies": {
     "jquery": "2.*",
     "jquery-ui": "*",
-	"qunit":"*",
-	"requirejs": "https://github.com/jrburke/requirejs.git#master",
-	"jquery-ui-multiselect": "https://github.com/ehynds/jquery-ui-multiselect-widget.git#master",
-    "automizyjs": "https://github.com/Automizy/Automizy-JS.git#master"
+    "qunit":"*",
+    "requirejs": "https://github.com/jrburke/requirejs.git#master",
+    "jquery-ui-multiselect": "https://github.com/ehynds/jquery-ui-multiselect-widget.git#master",
+    "automizy-js": "*"
   }
 }

@@ -61,14 +61,14 @@ module.exports = function (grunt) {
 				files: [
 					{expand: true, cwd: 'dist/', src: '**/automizy.api.min.js', dest: 'doc/js/'},
 					{expand: true, cwd: 'dist/', src: '**/automizy.api.min.map', dest: 'doc/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.js', dest: 'doc/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.map', dest: 'doc/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.css', dest: 'doc/css/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.js', dest: 'doc/js/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.map', dest: 'doc/js/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.css', dest: 'doc/css/'},
 					{expand: true, cwd: 'dist/', src: '**/automizy.api.min.js', dest: 'doc/example/js/'},
 					{expand: true, cwd: 'dist/', src: '**/automizy.api.min.map', dest: 'doc/example/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.js', dest: 'doc/example/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.map', dest: 'doc/example/js/'},
-					{expand: true, cwd: 'external/automizyjs/dist', src: '**/automizy.min.css', dest: 'doc/example/css/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.js', dest: 'doc/example/js/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.map', dest: 'doc/example/js/'},
+					{expand: true, cwd: 'external/automizy-js/dist', src: '**/automizy.min.css', dest: 'doc/example/css/'},
 					{expand: true, cwd: 'dist/', src: '**/*', dest: 'doc/downloads/'}
 				]
 			}
