@@ -1,0 +1,32 @@
+{
+    "name": "automizy/automizy-js-api",
+    "description": "JavaScript API library for Automizy Marketing Automation software",
+    "type": "library",
+    "keywords": [
+        "automizy-js-api",
+        "automizy",
+        "free",
+        "integrate",
+        "responsive",
+        "mobile-friendly"
+    ],
+    "homepage": "http://developers.automizy.com/automizyjsapi",
+    "license": "MIT",
+    "authors":[
+        { "name": "Gyorgy Reti", "email": "gyorgy.reti@automizy.com" },
+        { "name": "Dominik Sagi", "email": "dominik.sagi@automizy.com" },
+        { "name": "Abel Enekes", "email": "abel.enekes@automizy.com" },
+        { "name": "Gabor Koncz", "email": "gabor.koncz@automizy.com" }
+    ],
+    "support": {
+        "email": "gyorgy.reti@automizy.com",
+        "issues": "https://github.com/Automizy/Automizy-Js-Api/issues",
+        "wiki": "https://github.com/Automizy/Automizy-Js-Api/wiki",
+        "source": "https://github.com/Automizy/Automizy-Js-Api",
+        "docs": "http://developers.automizy.com/automizyjsapi"
+    },
+    "prefer-stable": true,
+    "config": {
+        "vendor-dir":".composer"
+    }
+}
