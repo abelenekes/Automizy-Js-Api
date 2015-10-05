@@ -3,12 +3,12 @@
     "description": "JavaScript API library for Automizy Marketing Automation software",
     "type": "library",
     "keywords": [
-        "automizy-js-api",
+        "automizyjsapi",
         "automizy",
         "free",
         "integrate",
         "responsive",
-        "mobile-friendly"
+        "mobilefriendly"
     ],
     "homepage": "http://developers.automizy.com/automizyjsapi",
     "license": "MIT",
