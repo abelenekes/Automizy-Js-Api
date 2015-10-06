@@ -59,6 +59,7 @@ define([
             contactImports: baseUrl + '/contact-imports',
             tags: baseUrl + '/tags',
             clients: baseUrl + '/clients',
+            updates: baseUrl + '/updates',
 
             emailPreview: baseUrl + '/email-preview'
         };

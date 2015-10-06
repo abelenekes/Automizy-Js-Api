@@ -59,6 +59,7 @@ var $AA = {};
             contactImports: baseUrl + '/contact-imports',
             tags: baseUrl + '/tags',
             clients: baseUrl + '/clients',
+            updates: baseUrl + '/updates',
 
             emailPreview: baseUrl + '/email-preview'
         };
@@ -2408,6 +2409,29 @@ var $AA = {};
     };
     
     $AA.initBasicFunctions(Clients, "Clients");
+
+})();
+
+(function(){
+
+    var Updates = function (obj) {
+        var t = this;
+        t.d = {
+            a: 3,
+            option: {},
+            url: $AA.u.updates
+        };
+        t.init();
+
+        if (typeof obj !== 'undefined') {
+            t.initParameter(obj);
+        }
+    };
+
+
+    var p = Updates.prototype;
+
+    $AA.initBasicFunctions(Updates, "Updates");
 
 })();
 
