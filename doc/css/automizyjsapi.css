@@ -315,3 +315,9 @@ footer{
     line-height: 2;
     font-size: 16px;
 }
+
+#docs-footer .copyright{
+    color:#939393;
+    font-size: 18px;
+    margin-top: 20px;
+}
