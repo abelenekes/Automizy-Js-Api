@@ -14,7 +14,7 @@ Automatic authentication
 You can gain access to the software only knowing a user name and password. The AutomizyJs API does all the hard work, you don't have to mess with token validation, although it gives the opportunity to do so if you really want.
 
 ```
-//Logging in with username and password or cliendId and clientSecret
+//Logging in with username and password
 $AA.token().login({
     username: "john.doe@gmail.com",
     password: "password123"
