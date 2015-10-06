@@ -1,5 +1,5 @@
-[Automizy Js Api](http://developers.automizy.com/automizyjsapi) — JavaScript API library for Automizy Marketing Automation software
-==============================================================================================
+[Automizy Js Api](http://developers.automizy.com/automizyjsapi) â€” JavaScript API library for Automizy Marketing Automation software
+====================================================================================================================================
 
 
 What is AutomizyJs API?
@@ -30,6 +30,5 @@ AutomizyJs API utilizes all features jQuery provides, every query returns a jqXH
 
 
 Questions?
-----------
-
+-------------
 If you have any questions, please feel free to contact at [help@automizy.com](mailto:help@automizy.com).
