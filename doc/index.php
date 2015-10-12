@@ -18,7 +18,7 @@
             };
             $(function() {
                 //Calls the tocify method on your HTML div.
-                $("#menu").tocify({highlightOnScroll:true, extendPage:true, context:'#content', scrollTo:120, highlightOffset: 100});
+                $("#menu").tocify({highlightOnScroll:true, extendPage:true, selectors:'h2,h3', context:'#content', scrollTo:120, highlightOffset: 100});
 
                 //Setting menu and content width
                 $("body").on('scroll',setContentWidth());
@@ -75,8 +75,12 @@
     </head>
     <body>
         <header>
-            AutomizyJs API Docs
-            <span class="downloads">Downloads</span>
+            <h1>AutomizyJs API Docs</h1>
+            <div class="header-buttons">
+                <a title="Automizy Developers" alt="Automizy Developers"  href="http://developers.automizy.com" class="header-button">Developers Page</a>
+                <a title="AutomizyJs API on GitHub" alt="AutomizyJs API on GitHub"  href="https://github.com/Automizy/Automizy-Js-Api" target="_blank" class="header-button">GitHub</a>
+                <a title="AutomizyJs API Downloads" alt="AutomizyJs API Downloads" class="downloads header-button">Downloads</a>
+            </div>
         </header>
         <div id='container'>
             <div id="menu-container">
@@ -116,10 +120,10 @@
                     <h2>Follow us</h2>
                     <div>Don't miss our news, debates, and inspiring stories. Find us on social networks!</div>
                     <div class='socials'>
-                        <a href="https://www.facebook.com/automizy" target="_blank"><img src="images/socials/facebook.png" /></a>
-                        <a href="https://twitter.com/automizy" target="_blank"><img src="images/socials/twitter.png" /></a>
-                        <a href="https://plus.google.com/+Automizyinc/about" target="_blank"><img src="images/socials/gplus.png" /></a>
-                        <a href="https://www.linkedin.com/company/automizy-inc-" target="_blank"><img src="images/socials/linkedin.png" /></a>
+                       <a title="Automizy Facebook Page" alt="Automizy Facebook Page"  href="https://www.facebook.com/automizy" target="_blank"><img src="images/socials/facebook.png" /></a>
+                        <a title="Automizy Twitter Page" alt="Automizy Twitter Page"  href="https://twitter.com/automizy" target="_blank"><img src="images/socials/twitter.png" /></a>
+                        <a title="Automizy Google Plus Page" alt="Automizy Google Plus Page"  href="https://plus.google.com/+Automizyinc/about" target="_blank"><img src="images/socials/gplus.png" /></a>
+                        <a title="Automizy LinkedIn Profile" alt="Automizy LinkedIn Profile"  href="https://www.linkedin.com/company/automizy-inc-" target="_blank"><img src="images/socials/linkedin.png" /></a>
                     </div>
                 </div>
                 <div class='footer-cell'>

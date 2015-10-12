@@ -1,5 +1,5 @@
 <section>
-    <h1>Module name</h1>  
+    <h2>Module name</h2>  
     <div class='module-description'>
         These are special functions which can be used on module.<br>
         In addition, all <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on module.<br>
@@ -9,7 +9,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>func1</h2>  
+                    <h3>func1</h3>  
                     <div class='function-description'>
                         Use this function to .<br>
                         <div class='function-paramenters'>Parameters:</div>

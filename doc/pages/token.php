@@ -1,5 +1,5 @@
 <section>
-    <h1>Token</h1>  
+    <h2>Token</h2>  
     <div class='module-description'>
         These are special functions which can be used on tokens.<br>
         There is a refresh loop running in the background, checking every 30 seconds if the access token is expired or expires in the following 120 seconds. If the token is close to its expiration time, this loop will generate a new one. If it expires the user won't be able to access the server until he gets a new one.<br>
@@ -8,7 +8,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refreshLoopStop</h2>  
+                    <h3>refreshLoopStop</h3>  
                     <div class='function-description'>
                         Use this function to stop the above described refresh loop.<br>
                     </div>
@@ -24,7 +24,7 @@ $AA.token().refreshLoopStop();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refreshLoopStart</h2>  
+                    <h3>refreshLoopStart</h3>  
                     <div class='function-description'>
                         Use this function to start the above described refresh loop.<br>
                     </div>
@@ -40,7 +40,7 @@ $AA.token().refreshLoopStart();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refreshLoopRestart</h2>  
+                    <h3>refreshLoopRestart</h3>  
                     <div class='function-description'>
                         Use this function to restart the above described refresh loop.<br>
                     </div>
@@ -56,7 +56,7 @@ $AA.token().refreshLoopRestart();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>get</h2>  
+                    <h3>get</h3>  
                     <div class='function-description'>
                         Use this function to get the acces token.<br>
                     </div>
@@ -73,7 +73,7 @@ $AA.token().get();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refresh</h2>  
+                    <h3>refresh</h3>  
                     <div class='function-description'>
                         Use this function to refresh the access token.<br>
                     </div>
@@ -89,7 +89,7 @@ $AA.tokens.refresh();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>error</h2>
+                    <h3>error</h3>
                     <div class='function-description'>
                         This function is called when an error occures during an API request. This can happen if you call a module or basic function with bad parameters.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -109,7 +109,7 @@ $AA.token().error(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>success</h2>
+                    <h3>success</h3>
                     <div class='function-description'>
                         This function is called when an API request is successful.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -129,7 +129,7 @@ $AA.token().success(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>loginError</h2>  
+                    <h3>loginError</h3>  
                     <div class='function-description'>
                         This function is called when the user tries to log in with invalid data. (For example logging in with empty password field.)<br>
                         Please note that while the input is invalid, no data will be sent to the server.
@@ -150,7 +150,7 @@ $AA.token().loginError(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>loginAjaxError</h2>  
+                    <h3>loginAjaxError</h3>  
                     <div class='function-description'>
                         This function is called when the user tries to log in with incorrect data.<br>
                         In this case the server will reject the login request.
@@ -171,7 +171,7 @@ $AA.token().loginAjaxError(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>loginAjaxSuccess</h2>  
+                    <h3>loginAjaxSuccess</h3>  
                     <div class='function-description'>
                         This function is called when the login process is successful.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -191,7 +191,7 @@ $AA.token().loginAjaxSuccess(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refreshAjaxError</h2>  
+                    <h3>refreshAjaxError</h3>  
                     <div class='function-description'>
                         This function is called when the user's refresh token is invalid/expired.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -211,7 +211,7 @@ $AA.token().refreshAjaxError(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>refreshAjaxSuccess</h2>  
+                    <h3>refreshAjaxSuccess</h3>  
                     <div class='function-description'>
                         This function is called when the user gets a new refresh token.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -231,7 +231,7 @@ $AA.token().refreshAjaxSuccess(function(){
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>passwordLogin</h2>  
+                    <h3>passwordLogin</h3>  
                     <div class='function-description'>
                         Use this function to log in using user name and password.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -264,7 +264,7 @@ $AA.token().passwordLogin({
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>credentialsLogin</h2>  
+                    <h3>credentialsLogin</h3>  
                     <div class='function-description'>
                         Use this function to log in with cliendId and clientSecret.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -297,7 +297,7 @@ $AA.token().credentialsLogin({
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>login</h2>  
+                    <h3>login</h3>  
                     <div class='function-description'>
                         Use this function to log in with username and password or cliendId and clientSecret key-value pairs.<br>
                         The program can decide which type of login you use based on the object keys.
@@ -336,7 +336,7 @@ $AA.token().login({
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>logout</h2>  
+                    <h3>logout</h3>  
                     <div class='function-description'>
                         Use this function to log out.<br>
                         All tokens will be deleted.
@@ -353,7 +353,7 @@ $AA.token().logout();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>loggedIn</h2>  
+                    <h3>loggedIn</h3>  
                     <div class='function-description'>
                         Use this function to check if you're logged in.<br>
                     </div>

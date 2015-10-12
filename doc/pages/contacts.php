@@ -1,5 +1,5 @@
 <section>
-    <h1>Contacts</h1>  
+    <h2>Contacts</h2>  
     <div class='module-description'>
         All <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on contacts.<br>
         To use the functions you have to invoke the <b>$AA.contacts()</b> method first.<br>

@@ -1,5 +1,5 @@
 <section>
-    <h1>Campaigns</h1>  
+    <h2>Campaigns</h2>  
     <div class='module-description'>
         These are special functions which can be used on campaigns<br>
         In addition, all <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on campaigns.<br>
@@ -10,7 +10,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenStatById</h2>  
+                    <h3>getOpenStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of opens.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -36,7 +36,7 @@ $AA.campaigns().getOpenStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickStatById</h2>  
+                    <h3>getClickStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of clicks on your links in your given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -62,7 +62,7 @@ $AA.campaigns().getClickStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getShareStatById</h2>  
+                    <h3>getShareStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the share statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -88,7 +88,7 @@ $AA.campaigns().getShareStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getUnsubscribeStatById</h2>  
+                    <h3>getUnsubscribeStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of contacts who clicked on the unsubscribe link in the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -113,7 +113,7 @@ $AA.campaigns().getUnsubscribeStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getBounceStatById</h2>  
+                    <h3>getBounceStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the bounce statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -139,7 +139,7 @@ $AA.campaigns().getBounceStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getGeoStatById</h2>  
+                    <h3>getGeoStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the geo statistics of the given campaign.<br>
                         Please note that opens through proxy servers are not counted by this function.
@@ -175,7 +175,7 @@ $AA.campaigns().getGeoStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenTimeLineById</h2>  
+                    <h3>getOpenTimeLineById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the open time line statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -222,7 +222,7 @@ $AA.campaigns().getOpenTimeLineById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickTimeLineById</h2>  
+                    <h3>getClickTimeLineById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the click time line statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -269,7 +269,7 @@ $AA.campaigns().getClickTimeLineById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenDevicePieById</h2>  
+                    <h3>getOpenDevicePieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -295,7 +295,7 @@ $AA.campaigns().getOpenDevicePieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickDevicePieById</h2>  
+                    <h3>getClickDevicePieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -321,7 +321,7 @@ $AA.campaigns().getClickDevicePieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenOsPieById</h2>  
+                    <h3>getOpenOsPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing operating system device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -347,7 +347,7 @@ $AA.campaigns().getOpenOsPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickOsPieById</h2>  
+                    <h3>getClickOsPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing operating system device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -373,7 +373,7 @@ $AA.campaigns().getClickOsPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenBrowserPieById</h2>  
+                    <h3>getOpenBrowserPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing browser statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -400,7 +400,7 @@ $AA.campaigns().getOpenBrowserPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickBrowserPieById</h2>  
+                    <h3>getClickBrowserPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing browser statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -427,7 +427,7 @@ $AA.campaigns().getClickBrowserPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenDomainPieById</h2>  
+                    <h3>getOpenDomainPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing domain statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -453,7 +453,7 @@ $AA.campaigns().getOpenDomainPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickDomainPieById</h2>  
+                    <h3>getClickDomainPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing domain statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -479,7 +479,7 @@ $AA.campaigns().getClickDomainPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getHeatMapById</h2>  
+                    <h3>getHeatMapById</h3>  
                     <div class='function-description'>
                         Use this function to get the clicked links of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>

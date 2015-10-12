@@ -24,14 +24,31 @@ header{
     position: fixed;
     min-width:400px;
     z-index: 999;
+    box-sizing: border-box;
 }
 
-.downloads{
+header h1{
+    margin: 0;
+    font-size: inherit;
+    width: auto;
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+}
+
+.header-buttons{
+    display:inline-block;
     float:right;
-    margin-right:50px;
-    font-size: 24px;
+    text-align: right;
+}
+
+.header-button{
+    float:none;
+    margin-left:20px;
+    font-size: 20px;
     cursor: pointer;
     color: rgb(255, 255, 255);
+    text-decoration: none;
     padding: 10px;
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.6);
     -webkit-border-radius: 5px;
@@ -47,6 +64,7 @@ header{
     -moz-box-shadow:    0px 2px 1px rgba(50, 50, 50, 0.75);
     box-shadow:         0px 2px 1px rgba(50, 50, 50, 0.75);
 }
+
 
 #menu-container{
     box-sizing: border-box;
@@ -109,7 +127,7 @@ section{
     margin-top:30px;
 }
 
-section h1{
+section h2{
     padding: 15px 0 15px 30px;
     font-size: 26px;
     font-family: Arial;
@@ -119,7 +137,7 @@ section h1{
     background-color: #F9F9F9;
     color:#5F8FC8;
 }
-section h2{
+section h3{
     padding: 0 0 5px 0;
     font-size: 20px;
     font-family: Arial;
@@ -243,7 +261,7 @@ article ul li{
     width:95%;
 }
 
-#introduction h2{
+#introduction h3{
     margin:50px 0 20px 0;
 }
 
@@ -280,7 +298,7 @@ footer{
     display:inline-block;
 }
 
-#docs-footer .footer-cell h2{
+#docs-footer .footer-cell h3{
     color: #ffffff;
     font-weight: normal;
     margin: 50px 0 30px 0;
