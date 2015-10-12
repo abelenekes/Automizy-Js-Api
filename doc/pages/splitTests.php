@@ -1,5 +1,5 @@
 <section>
-    <h1>Split Tests</h1>  
+    <h2>Split Tests</h2>  
     <div class='module-description'>
         These are special functions which can be used on split tests<br>
         In addition, all <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on split tests.<br>
@@ -10,7 +10,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>send</h2>  
+                    <h3>send</h3>  
                     <div class='function-description'>
                         Use this function to create and send a new split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -126,7 +126,7 @@ $AA.splitTests().send({
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenStatById</h2>  
+                    <h3>getOpenStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of opens.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -161,7 +161,7 @@ $AA.splitTests().getOpenStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickStatById</h2>  
+                    <h3>getClickStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of clicks on your links in your given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -196,7 +196,7 @@ $AA.splitTests().getClickStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getShareStatById</h2>  
+                    <h3>getShareStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the share statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -231,7 +231,7 @@ $AA.splitTests().getShareStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getUnsubscribeStatById</h2>  
+                    <h3>getUnsubscribeStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the number of contacts who clicked on the unsubscribe link in the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -264,7 +264,7 @@ $AA.splitTests().getUnsubscribeStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getBounceStatById</h2>  
+                    <h3>getBounceStatById</h3>  
                     <div class='function-description'>
                         Use this function to get the bounce statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -299,7 +299,7 @@ $AA.splitTests().getBounceStatById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenTimeLineById</h2>  
+                    <h3>getOpenTimeLineById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the open time line statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -376,7 +376,7 @@ $AA.splitTests().getOpenTimeLineById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickTimeLineById</h2>  
+                    <h3>getClickTimeLineById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the click time line statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -453,7 +453,7 @@ $AA.splitTests().getClickTimeLineById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenDevicePieById</h2>  
+                    <h3>getOpenDevicePieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -486,7 +486,7 @@ $AA.splitTests().getOpenDevicePieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickDevicePieById</h2>  
+                    <h3>getClickDevicePieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -519,7 +519,7 @@ $AA.splitTests().getClickDevicePieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenOsPieById</h2>  
+                    <h3>getOpenOsPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing operating system device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -552,7 +552,7 @@ $AA.splitTests().getOpenOsPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickOsPieById</h2>  
+                    <h3>getClickOsPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing operating system device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -585,7 +585,7 @@ $AA.splitTests().getClickOsPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenBrowserPieById</h2>  
+                    <h3>getOpenBrowserPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing browser statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -620,7 +620,7 @@ $AA.splitTests().getOpenBrowserPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickBrowserPieById</h2>  
+                    <h3>getClickBrowserPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing browser statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -655,7 +655,7 @@ $AA.splitTests().getClickBrowserPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getOpenDomainPieById</h2>  
+                    <h3>getOpenDomainPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of opens, showing domain statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -688,7 +688,7 @@ $AA.splitTests().getOpenDomainPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getClickDomainPieById</h2>  
+                    <h3>getClickDomainPieById</h3>  
                     <div class='function-description'>
                         Use this function to get the array representing the pie chart of clicks, showing domain statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>

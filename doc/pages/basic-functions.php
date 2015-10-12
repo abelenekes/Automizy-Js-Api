@@ -1,5 +1,5 @@
 <section>
-    <h1>Basic Functions</h1>  
+    <h2>Basic Functions</h2>  
     <div class='module-description'>
         These are global functions which can be used on all modules.
     </div>
@@ -7,7 +7,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>insert</h2>  
+                    <h3>insert</h3>  
                     <div class='function-description'>
                         Use this function to insert an element.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -50,7 +50,7 @@ $AA.segments().insert({name: 'new segment'}, true)
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>insertSync</h2>  
+                    <h3>insertSync</h3>  
                     <div class='function-description'>
                         Use this function to insert an element sychronously. (The browser will wait for the response.)<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -92,7 +92,7 @@ $AA.segments().insertSync({name: 'new segment'})
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>update</h2>  
+                    <h3>update</h3>  
                     <div class='function-description'>
                         Use this function to update a field of an element.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -136,7 +136,7 @@ $AA.segments().update({'name':'First segment'},1, false);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>updateSync</h2>  
+                    <h3>updateSync</h3>  
                     <div class='function-description'>
                         Use this function to update a field of an element sychronously. (The browser will wait for the response.)<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -179,7 +179,7 @@ $AA.segments().update({'name':'First segment'},1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>get</h2>  
+                    <h3>get</h3>  
                     <div class='function-description'>
                         Use this function to get the result of any query.<br>
                         The result will be a jqXHR containing the elements which met the query's conditions.<br>
@@ -247,7 +247,7 @@ $AA.segments().where([
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getSync</h2>  
+                    <h3>getSync</h3>  
                     <div class='function-description'>
                         This function is the same as the get() method, but it works synchronously. (The browser will wait for the response.)<br>
                     </div>
@@ -287,7 +287,7 @@ $AA.segments().getSync();
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getAll</h2>  
+                    <h3>getAll</h3>  
                     <div class='function-description'>
                         Use this function to get all records in of the particular module.<br>
                         If you use this function, it will ignore any modifier functions (like limit or where) and will return all results.
@@ -328,7 +328,7 @@ $AA.segments().limit(1).getAll(); //limit will be ignored!
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getAllIdNamePair</h2>  
+                    <h3>getAllIdNamePair</h3>  
                     <div class='function-description'>
                         Use this function to return all elements with their id-s and with their value in the selected field.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -363,7 +363,7 @@ $AA.segments().getAllIdNamePair('name');
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getFieldById</h2>  
+                    <h3>getFieldById</h3>  
                     <div class='function-description'>
                         Use this function to get the value of the requested field of the record with the particular id.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -388,7 +388,7 @@ $AA.segments().getFieldById(1, 'name');
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>getRecordById</h2>  
+                    <h3>getRecordById</h3>  
                     <div class='function-description'>
                         Use this function to get a record with the particular id.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -429,7 +429,7 @@ $AA.segments().getRecordById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>delete</h2>  
+                    <h3>delete</h3>  
                     <div class='function-description'>
                         Use this function to remove an element by id.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -453,7 +453,7 @@ $AA.segments().delete(3)
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>deleteSync</h2>  
+                    <h3>deleteSync</h3>  
                     <div class='function-description'>
                         Use this function to remove an element by id synchronously.<br>
                         <div class='function-paramenters'>Parameters:</div>
