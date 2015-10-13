@@ -25,6 +25,7 @@ define([
 
     "automizyApi/apis/account",
     "automizyApi/apis/clients",
+    "automizyApi/apis/updates",
 
     "automizyApi/functions/initBasicFunctions",
     "automizyApi/functions/parseBoolean",
