@@ -1,5 +1,5 @@
 <section>
-    <h1>Users</h1>  
+    <h2>Users</h2>  
     <div class='module-description'>
         All <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on users.<br>
         To use the functions you have to invoke the <b>$AA.users()</b> method first.<br>
@@ -9,7 +9,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>switch</h2>
+                    <h3>switch</h3>
                     <div class='function-description'>
                         Use this function to switch user.<br>
                         <div class='function-paramenters'>Parameters:</div>

@@ -1,5 +1,5 @@
 <section>
-    <h1>Segments</h1>  
+    <h2>Segments</h2>  
     <div class='module-description'>
         These are special functions which can be used on segments.<br>
         In addition, all <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on segments.<br>
@@ -12,7 +12,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>calculateByArray</h2>
+                    <h3>calculateByArray</h3>
                     <div class='function-description'>
                         Use this function to .<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -31,7 +31,7 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>calculateById</h2>
+                    <h3>calculateById</h3>
                     <div class='function-description'>
                         Use this function to calculate a segment wihtout saving.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -56,7 +56,7 @@ numberOfContacts: "100"
         <tr>
             <td class='function-body'>
                 <article>
-                    <h2>calculateAndSave</h2>
+                    <h3>calculateAndSave</h3>
                     <div class='function-description'>
                         Use this function to calculate a segment with saving.<br>
                         <div class='function-paramenters'>Parameters:</div>
