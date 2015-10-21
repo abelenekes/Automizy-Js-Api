@@ -527,13 +527,13 @@ $AA.campaigns().getHeatMapById(1);
 $AA.campaigns().getLinksById(1);
                 </pre>
                 <pre class='prettyprint linenums' data-name='response'>
-//Response is an array, each element represents a link
-[
+//Response is an object, each element represents a link
+{
     "[{unsubscribelink}]",
     "[{webversion}]",
     "[{confirmlink}]",
     "https://www.facebook.com/sharer/sharer.php?u=[{webversion}]"
-]
+}
                 </pre>
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
