@@ -93,7 +93,7 @@
                 
                 $config = [
                     'urls' => [
-                        'restApiDoc' => 'http://localhost:8080/AutomizyRestApiDocs/',
+                        'restApiDoc' => 'http://developers.automizy.com/automizyrestapi/',
                         'automizyJsApi' => ''
                     ]
                 ];
