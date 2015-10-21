@@ -509,5 +509,34 @@ $AA.campaigns().getHeatMapById(1);
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
         </tr>
+        <tr>
+            <td class='function-body'>
+                <article>
+                    <h3>getLinksById</h3>  
+                    <div class='function-description'>
+                        Use this function to get the links in the given campaign.<br>
+                        <div class='function-paramenters'>Parameters:</div>
+                        <code>id</code>: The id of the campaign you want to inspect.<br>
+                    </div>
+                </article>
+            </td>
+            <td class='function-example'>
+                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <pre class='prettyprint linenums'  data-name='request'>
+//Getting the clicked links of the first campaign
+$AA.campaigns().getLinksById(1);
+                </pre>
+                <pre class='prettyprint linenums' data-name='response'>
+//Response is an array, each element represents a link
+[
+    "[{unsubscribelink}]",
+    "[{webversion}]",
+    "[{confirmlink}]",
+    "https://www.facebook.com/sharer/sharer.php?u=[{webversion}]"
+]
+                </pre>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
+            </td>
+        </tr>
     </table>
 </section>
