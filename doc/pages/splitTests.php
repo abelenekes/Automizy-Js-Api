@@ -131,6 +131,8 @@ $AA.splitTests().send({
                         Use this function to get the number of opens.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -166,6 +168,8 @@ $AA.splitTests().getOpenStatById(1);
                         Use this function to get the number of clicks on your links in your given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -201,6 +205,8 @@ $AA.splitTests().getClickStatById(1);
                         Use this function to get the share statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -236,6 +242,8 @@ $AA.splitTests().getShareStatById(1);
                         Use this function to get the number of contacts who clicked on the unsubscribe link in the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -269,6 +277,8 @@ $AA.splitTests().getUnsubscribeStatById(1);
                         Use this function to get the bounce statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -304,6 +314,8 @@ $AA.splitTests().getBounceStatById(1);
                         Use this function to get the array representing the open time line statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -322,20 +334,30 @@ $AA.splitTests().getOpenTimeLineById(1);
         //Campaign 1, first timeframe
         {
             date :{
-                    date: "15-05-06 02:08:44",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 0 //zero openings
+                date: "15-05-06 02:08:44",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 0,
+                    unique: 0
+                }
+            }
         },
         //Campaign 1, following timeframes
         {
             date :{
-                    date: "15-05-06 03:10:15",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 2  //two total openings
+                date: "15-05-06 03:10:15",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 3,
+                    unique: 2
+                }
+            }
         },
         {},
         .
@@ -348,20 +370,30 @@ $AA.splitTests().getOpenTimeLineById(1);
         //Campaign 2, first timeframe
         {
             date :{
-                    date: "15-05-06 02:08:44",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 0 //zero openings
+                date: "15-05-06 02:08:44",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 0,
+                    unique: 0
+                }
+            }
         },
         //Campaign 2, following timeframes
         {
             date :{
-                    date: "15-05-06 03:10:15",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 2  //two total openings
+                date: "15-05-06 03:10:15",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 3,
+                    unique: 1
+                }
+            }
         },
         {},
         .
@@ -381,6 +413,8 @@ $AA.splitTests().getOpenTimeLineById(1);
                         Use this function to get the array representing the click time line statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -399,20 +433,30 @@ $AA.splitTests().getClickTimeLineById(1);
         //Campaign 1, first timeframe
         {
             date :{
-                    date: "15-05-06 02:08:44",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 0 //zero clicks
+                date: "15-05-06 02:08:44",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            }
+            value{
+                all: {
+                    total: 1,
+                    unique: 1
+                }
+            }
         },
         //Campaign 1, following timeframes
         {
             date :{
-                    date: "15-05-06 03:10:15",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 2  //two total clicks
+                date: "15-05-06 03:10:15",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 3,
+                    unique: 2
+                }
+            }
         },
         {},
         .
@@ -425,20 +469,30 @@ $AA.splitTests().getClickTimeLineById(1);
         //Campaign 2, first timeframe
         {
             date :{
-                    date: "15-05-06 02:08:44",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 0 //zero clicks
+                date: "15-05-06 02:08:44",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 0,
+                    unique: 0
+                }
+            }
         },
         //Campaign 2, following timeframes
         {
             date :{
-                    date: "15-05-06 03:10:15",
-                    timezone_type:3,
-                    timezone:"Europe\/Budapest"
-                },
-            value : 2  //two total clicks
+                date: "15-05-06 03:10:15",
+                timezone_type:3,
+                timezone:"Europe\/Budapest"
+            },
+            value{
+                all: {
+                    total: 2,
+                    unique: 2
+                }
+            }
         },
         {},
         .
@@ -458,6 +512,8 @@ $AA.splitTests().getClickTimeLineById(1);
                         Use this function to get the array representing the pie chart of opens, showing device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -491,6 +547,8 @@ $AA.splitTests().getOpenDevicePieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -524,6 +582,8 @@ $AA.splitTests().getClickDevicePieById(1);
                         Use this function to get the array representing the pie chart of opens, showing operating system device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -557,6 +617,8 @@ $AA.splitTests().getOpenOsPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing operating system device statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -590,6 +652,8 @@ $AA.splitTests().getClickOsPieById(1);
                         Use this function to get the array representing the pie chart of opens, showing browser statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -625,6 +689,8 @@ $AA.splitTests().getOpenBrowserPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing browser statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -660,6 +726,8 @@ $AA.splitTests().getClickBrowserPieById(1);
                         Use this function to get the array representing the pie chart of opens, showing domain statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -693,6 +761,8 @@ $AA.splitTests().getOpenDomainPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing domain statistics of the given split test.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the split test you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the split test was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -718,6 +788,5 @@ $AA.splitTests().getClickDomainPieById(1);
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
         </tr>
-
     </table>
 </section>
