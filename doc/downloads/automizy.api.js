@@ -1620,6 +1620,16 @@ var $AA = {};
             error: $AA.token().error()
         });
     };
+    p.getLinksById = function (id) {
+        var t = this;
+        return $.ajax({
+            url: t.d.url + '/' + id + '/links',
+            type: 'GET',
+            dataType: 'json',
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
     
     $AA.initBasicFunctions(Campaigns, "Campaigns");
     p.send = p.insert;
