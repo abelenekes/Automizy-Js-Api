@@ -552,6 +552,17 @@ define([
             error: $AA.token().error()
         });
     };
+    p.getCombinedById = function (id, data) {
+        var t = this;
+        return $.ajax({
+            url: t.d.url + '/' + id + '/combined',
+            type: 'POST',
+            dataType: 'json',
+            data:data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
     
     $AA.initBasicFunctions(Campaigns, "Campaigns");
     p.send = p.insert;

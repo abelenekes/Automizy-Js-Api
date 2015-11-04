@@ -176,5 +176,6 @@ define([
             //}
         });
         table.data('xhr', xhr);
+        return xhr;
     }
 });
