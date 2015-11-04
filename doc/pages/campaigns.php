@@ -15,6 +15,8 @@
                         Use this function to get the number of opens.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -41,6 +43,8 @@ $AA.campaigns().getOpenStatById(1);
                         Use this function to get the number of clicks on your links in your given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -67,6 +71,8 @@ $AA.campaigns().getClickStatById(1);
                         Use this function to get the share statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -93,6 +99,8 @@ $AA.campaigns().getShareStatById(1);
                         Use this function to get the number of contacts who clicked on the unsubscribe link in the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -118,6 +126,8 @@ $AA.campaigns().getUnsubscribeStatById(1);
                         Use this function to get the bounce statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -145,6 +155,8 @@ $AA.campaigns().getBounceStatById(1);
                         Please note that opens through proxy servers are not counted by this function.
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -180,6 +192,8 @@ $AA.campaigns().getGeoStatById(1);
                         Use this function to get the array representing the open time line statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -199,7 +213,12 @@ $AA.campaigns().getOpenTimeLineById(1);
                 timezone_type:3,
                 timezone:"Europe\/Budapest"
             },
-        value : 0 //zero openings
+        value{
+            all: {
+                total: 3,
+                unique: 2
+            }
+        }
     },
     //Following timeframes
     {
@@ -208,7 +227,12 @@ $AA.campaigns().getOpenTimeLineById(1);
                 timezone_type:3,
                 timezone:"Europe\/Budapest"
             },
-        value : 2  //two total openings
+        value{
+            all: {
+                total: 3,
+                unique: 2
+            }
+        }
     },
     {},
     .
@@ -227,6 +251,8 @@ $AA.campaigns().getOpenTimeLineById(1);
                         Use this function to get the array representing the click time line statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -246,7 +272,12 @@ $AA.campaigns().getClickTimeLineById(1);
                 timezone_type:3,
                 timezone:"Europe\/Budapest"
             },
-        value : 0 //zero clicks
+        value{
+            all: {
+                total: 3,
+                unique: 2
+            }
+        }
     },
     //Following timeframes
     {
@@ -255,7 +286,12 @@ $AA.campaigns().getClickTimeLineById(1);
                 timezone_type:3,
                 timezone:"Europe\/Budapest"
             },
-        value : 12  //two total clicks
+        value{
+            all: {
+                total: 3,
+                unique: 2
+            }
+        }
     },
     {},
     .
@@ -274,6 +310,8 @@ $AA.campaigns().getClickTimeLineById(1);
                         Use this function to get the array representing the pie chart of opens, showing device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -300,6 +338,8 @@ $AA.campaigns().getOpenDevicePieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -326,6 +366,8 @@ $AA.campaigns().getClickDevicePieById(1);
                         Use this function to get the array representing the pie chart of opens, showing operating system device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -352,6 +394,8 @@ $AA.campaigns().getOpenOsPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing operating system device statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -378,6 +422,8 @@ $AA.campaigns().getClickOsPieById(1);
                         Use this function to get the array representing the pie chart of opens, showing browser statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -405,6 +451,8 @@ $AA.campaigns().getOpenBrowserPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing browser statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -432,6 +480,8 @@ $AA.campaigns().getClickBrowserPieById(1);
                         Use this function to get the array representing the pie chart of opens, showing domain statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -458,6 +508,8 @@ $AA.campaigns().getOpenDomainPieById(1);
                         Use this function to get the array representing the pie chart of clicks, showing domain statistics of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -484,6 +536,8 @@ $AA.campaigns().getClickDomainPieById(1);
                         Use this function to get the clicked links of the given campaign.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
                     </div>
                 </article>
             </td>
@@ -505,6 +559,35 @@ $AA.campaigns().getHeatMapById(1);
         url: "[{unsubscribelink}]"
     }
 ]
+                </pre>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
+            </td>
+        </tr>
+        <tr>
+            <td class='function-body'>
+                <article>
+                    <h3>getLinksById</h3>  
+                    <div class='function-description'>
+                        Use this function to get the links in the given campaign.<br>
+                        <div class='function-paramenters'>Parameters:</div>
+                        <code>id</code>: The id of the campaign you want to inspect.<br>
+                    </div>
+                </article>
+            </td>
+            <td class='function-example'>
+                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <pre class='prettyprint linenums'  data-name='request'>
+//Getting the clicked links of the first campaign
+$AA.campaigns().getLinksById(1);
+                </pre>
+                <pre class='prettyprint linenums' data-name='response'>
+//Response is an object, each element represents a link
+{
+    "[{unsubscribelink}]",
+    "[{webversion}]",
+    "[{confirmlink}]",
+    "https://www.facebook.com/sharer/sharer.php?u=[{webversion}]"
+}
                 </pre>
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
