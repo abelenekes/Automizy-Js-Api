@@ -630,13 +630,12 @@ $AA.campaigns().getCombinedById(1, {
 });
                 </pre>
                 <pre class='prettyprint linenums' data-name='response'>
-//Response is an object, each element represents a link
 {
     deviceOpenPie: {
         "PC\/Laptop": 10,
         "Mobile": 3
     },
-    [
+    geoChart:[
         {
             count: "4",
             country: "HUNGARY",
