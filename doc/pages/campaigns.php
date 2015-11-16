@@ -615,9 +615,9 @@ $AA.campaigns().getCombinedById(1, {
         from: "2015.11.01",
         to: "2015.11.10"
     },
-    openLine: {
+    deviceOpenPie: {
         type:'open',
-        format:'timeline',
+        format:'aggregate',
         from: "2015.11.01",
         to: "2015.11.10"
     },
