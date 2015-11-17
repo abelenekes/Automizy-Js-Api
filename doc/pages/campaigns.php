@@ -618,6 +618,7 @@ $AA.campaigns().getCombinedById(1, {
     deviceOpenPie: {
         type:'open',
         format:'aggregate',
+        groupBy: 'device',
         from: "2015.11.01",
         to: "2015.11.10"
     },
