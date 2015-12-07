@@ -592,5 +592,70 @@ $AA.campaigns().getLinksById(1);
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
         </tr>
+        <tr>
+            <td class='function-body'>
+                <article>
+                    <h3>getCombinedById</h3>  
+                    <div class='function-description'>
+                        Use this function to get multiple types of data of the given campaign.<br>
+                        <div class='function-paramenters'>Parameters:</div>
+                        <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>data</code>: The types of data you want to get. The keys of the response object will be the same you specified in the data object.<br>
+                    </div>
+                </article>
+            </td>
+            <td class='function-example'>
+                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <pre class='prettyprint linenums'  data-name='request'>
+//Getting different types of data of the first campaign in different formats
+$AA.campaigns().getCombinedById(1, {
+    open: {
+        type:'open',
+        format:'total',
+        from: "2015.11.01",
+        to: "2015.11.10"
+    },
+    deviceOpenPie: {
+        type:'open',
+        format:'aggregate',
+        groupBy: 'device',
+        from: "2015.11.01",
+        to: "2015.11.10"
+    },
+    geoChart: {
+        type:'geo-location',
+        format:'raw',
+        from: "2015.11.01",
+        to: "2015.11.10"
+    }
+});
+                </pre>
+                <pre class='prettyprint linenums' data-name='response'>
+{
+    deviceOpenPie: {
+        "PC\/Laptop": 10,
+        "Mobile": 3
+    },
+    geoChart:[
+        {
+            count: "4",
+            country: "HUNGARY",
+            region: "BUDAPEST"
+        },
+        {
+            count: "9",
+            country: "USA",
+            region: "FLORIDA"
+        }
+    ],
+    open:{
+        total: 13,
+        unique: 8
+    }
+}
+                </pre>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
+            </td>
+        </tr>
     </table>
 </section>

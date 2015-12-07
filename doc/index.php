@@ -70,6 +70,7 @@
                     downloadDialog.open();
                 });
                 
+                $('body').scroll();
               });
         </script>
     </head>
