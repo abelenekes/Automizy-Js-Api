@@ -188,6 +188,7 @@ define([
         var obj = obj || {};
         obj.username = obj.username || false;
         obj.password = obj.password || false;
+        obj.hash = obj.hash || false;
 
         if (obj.username === false || obj.password === false) {
             t.loginError.apply(t, ['The username and password must be provide!']);
@@ -196,13 +197,18 @@ define([
 
         $AA.cookie.set('AutomizyApiUsername', obj.username, t.cookieAttributes());
 
+        var data = {
+            username: obj.username,
+            password: obj.password
+        };
+        if(obj.hash !== false){
+            data.hash = obj.hash;
+        }
+
         return $.ajax({
             type: "POST",
             url: $AA.u.loginPhp,
-            data: {
-                username: obj.username,
-                password: obj.password
-            },
+            data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
                 t.loggedIn(true);
@@ -220,20 +226,26 @@ define([
         var obj = obj || {};
         obj.clientId = obj.clientId || false;
         obj.clientSecret = obj.clientSecret || false;
+        obj.hash = obj.hash || false;
 
         if (obj.clientId === false || obj.clientSecret === false) {
             t.loginError.apply(t, ['The clientId and clientSecret must be provide!']);
             return false;
         }
 
+        var data = {
+            grant_type: "client_credentials",
+            client_id: obj.clientId,
+            client_secret: obj.clientSecret
+        };
+        if(obj.hash !== false){
+            data.hash = obj.hash;
+        }
+
         return $.ajax({
             type: "POST",
             url: $AA.u.oauth,
-            data: {
-                grant_type: "client_credentials",
-                client_id: obj.clientId,
-                client_secret: obj.clientSecret
-            },
+            data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
                 t.loggedIn(true);

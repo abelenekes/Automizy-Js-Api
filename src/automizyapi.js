@@ -24,8 +24,10 @@ define([
     "automizyApi/apis/tags",
 
     "automizyApi/apis/account",
+    "automizyApi/apis/accountStatistics",
     "automizyApi/apis/clients",
     "automizyApi/apis/updates",
+    "automizyApi/apis/plugins",
 
     "automizyApi/functions/initBasicFunctions",
     "automizyApi/functions/parseBoolean",

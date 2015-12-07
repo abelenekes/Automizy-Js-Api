@@ -9,6 +9,9 @@ define([
             return false;
         }
         var apiName = table.data('apiName');
+        if(typeof $AA[apiName] === 'undefined'){
+            return false;
+        }
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var apiItemsDir = table.data('apiItemsDir');
         var apiFormat = table.data('apiFormat');
@@ -19,6 +22,7 @@ define([
         var page = table.page();
         var fields = table.data('fields') || false;
         var showId = false;
+        var where = table.data('where') || [];
         if(typeof table.data('xhr') !== 'undefined'){
             table.data('xhr').abort();
         }
@@ -53,17 +57,14 @@ define([
             fields = JSON.stringify(fields);
         }
 
-        var where = [];
         if((typeof table.d.searchValue === 'string' || typeof table.d.searchValue === 'number') && table.d.searchValue.length > 0){
             var cols = table.cols();
             for(var i = 0; i < cols.length; i++){
-                console.log(cols[i]);
                 var scols = table.d.settings.cols;
                 var ss = {};
                 for(var j = 0; j < scols.length; j++){
                     ss[scols[j].name || 0] = scols[j].searchable===false?false:true;
                 }
-                console.log(ss,scols);
                 var name = cols[i].name();
                 if(ss[name]){
                     where.push([[name, 'like', '%'+table.d.searchValue+'%']]);
@@ -73,7 +74,6 @@ define([
 
         table.d.$checkboxCheckAll.prop('checked', false).change();
         table.loading();
-
         var xhr = $AA[apiName]().links('').fields(fields).limit(limit).page(page).where(where).orderBy(orderBy).orderDir(orderDir).urlSuffix(apiUrlSuffix).format(apiFormat).get().done(function (data) {
             table.pageMax(data.page_count);
             if(apiItemsDir !== false){
@@ -130,9 +130,9 @@ define([
                                         if (records[i][j][l] !== null && (typeof records[i][j][l] === 'array' || typeof records[i][j][l] === 'object')) {
                                             if($.isArray(records[i][j][l])){
                                                 row.values['customFields.' + l] = records[i][j][l];
-                                                if(records[i][j][l].length > 0){
+                                                /*if(records[i][j][l].length > 0){
                                                     row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + records[i][j][l].join('</li><li>') + '</li></ul>';
-                                                }
+                                                }*/
                                             }else {
                                                 row.values['customFields.' + l] = records[i][j][l]['date'] || records[i][j][l]['value'] || records[i][j][l][Object.keys(records[i][j][l])[0]] || '';
                                             }
@@ -151,6 +151,7 @@ define([
                     rows.push(row);
                 }
 
+                table.data({records:records});
                 table.deleteRows();
                 var col = table.getColByName('customFields');
                 if(col !== false){

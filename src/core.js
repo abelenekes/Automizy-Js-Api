@@ -56,10 +56,12 @@ define([
             forms: baseUrl + '/forms',
             automations: baseUrl + '/automations',
             account: baseUrl + '/account',
+            accountStatistics: baseUrl + '/account/statistics',
             contactImports: baseUrl + '/contact-imports',
             tags: baseUrl + '/tags',
             clients: baseUrl + '/clients',
             updates: baseUrl + '/updates',
+            plugins: baseUrl + '/plugins',
 
             emailPreview: baseUrl + '/email-preview'
         };
