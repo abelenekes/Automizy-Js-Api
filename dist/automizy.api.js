@@ -56,10 +56,12 @@ var $AA = {};
             forms: baseUrl + '/forms',
             automations: baseUrl + '/automations',
             account: baseUrl + '/account',
+            accountStatistics: baseUrl + '/account/statistics',
             contactImports: baseUrl + '/contact-imports',
             tags: baseUrl + '/tags',
             clients: baseUrl + '/clients',
             updates: baseUrl + '/updates',
+            plugins: baseUrl + '/plugins',
 
             emailPreview: baseUrl + '/email-preview'
         };
@@ -384,6 +386,7 @@ var $AA = {};
         var obj = obj || {};
         obj.username = obj.username || false;
         obj.password = obj.password || false;
+        obj.hash = obj.hash || false;
 
         if (obj.username === false || obj.password === false) {
             t.loginError.apply(t, ['The username and password must be provide!']);
@@ -392,13 +395,18 @@ var $AA = {};
 
         $AA.cookie.set('AutomizyApiUsername', obj.username, t.cookieAttributes());
 
+        var data = {
+            username: obj.username,
+            password: obj.password
+        };
+        if(obj.hash !== false){
+            data.hash = obj.hash;
+        }
+
         return $.ajax({
             type: "POST",
             url: $AA.u.loginPhp,
-            data: {
-                username: obj.username,
-                password: obj.password
-            },
+            data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
                 t.loggedIn(true);
@@ -416,20 +424,26 @@ var $AA = {};
         var obj = obj || {};
         obj.clientId = obj.clientId || false;
         obj.clientSecret = obj.clientSecret || false;
+        obj.hash = obj.hash || false;
 
         if (obj.clientId === false || obj.clientSecret === false) {
             t.loginError.apply(t, ['The clientId and clientSecret must be provide!']);
             return false;
         }
 
+        var data = {
+            grant_type: "client_credentials",
+            client_id: obj.clientId,
+            client_secret: obj.clientSecret
+        };
+        if(obj.hash !== false){
+            data.hash = obj.hash;
+        }
+
         return $.ajax({
             type: "POST",
             url: $AA.u.oauth,
-            data: {
-                grant_type: "client_credentials",
-                client_id: obj.clientId,
-                client_secret: obj.clientSecret
-            },
+            data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
                 t.loggedIn(true);
@@ -578,7 +592,7 @@ var $AA = {};
                 t.d.option.order = obj.order; //name:desc
             if (typeof obj.links !== 'undefined')
                 t.d.option.links = obj.links; //milyen linkek kellenek vesszővel
-        }
+        };
         p.getDataFromParameter = p.getDataFromParameter || function(obj){
             var data = {};
             if (obj.fields !== false)
@@ -1630,6 +1644,17 @@ var $AA = {};
             error: $AA.token().error()
         });
     };
+    p.getCombinedById = function (id, data) {
+        var t = this;
+        return $.ajax({
+            url: t.d.url + '/' + id + '/combined',
+            type: 'POST',
+            dataType: 'json',
+            data:data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
     
     $AA.initBasicFunctions(Campaigns, "Campaigns");
     p.send = p.insert;
@@ -2392,6 +2417,29 @@ var $AA = {};
 })();
 
 (function(){
+    var AccountStatistics = function (obj) {
+        var t = this;
+        t.d = {
+            a: 3,
+            option: {},
+            url: $AA.u.accountStatistics
+        };
+        t.init();
+
+        if (typeof obj !== 'undefined') {
+            t.initParameter(obj);
+        }
+    };
+
+
+    var p = AccountStatistics.prototype;
+
+    
+    $AA.initBasicFunctions(AccountStatistics, "AccountStatistics");
+
+})();
+
+(function(){
     var Clients = function (obj) {
         var t = this;
         t.d = {
@@ -2446,6 +2494,27 @@ var $AA = {};
 })();
 
 (function(){
+    var Plugins = function (obj) {
+        var t = this;
+        t.d = {
+            a: 3,
+            option: {},
+            url: $AA.u.plugins
+        };
+        t.init();
+
+        if (typeof obj !== 'undefined') {
+            t.initParameter(obj);
+        }
+    };
+
+    var p = Plugins.prototype;
+
+    $AA.initBasicFunctions(Plugins, "Plugins");
+
+})();
+
+(function(){
     $AA.parseBoolean = function (value, nullOnFailure) {
         if (typeof value === 'string')
             value = value.toLowerCase();
@@ -2495,6 +2564,9 @@ var $AA = {};
             return false;
         }
         var apiName = table.data('apiName');
+        if(typeof $AA[apiName] === 'undefined'){
+            return false;
+        }
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var apiItemsDir = table.data('apiItemsDir');
         var apiFormat = table.data('apiFormat');
@@ -2505,6 +2577,7 @@ var $AA = {};
         var page = table.page();
         var fields = table.data('fields') || false;
         var showId = false;
+        var where = table.data('where') || [];
         if(typeof table.data('xhr') !== 'undefined'){
             table.data('xhr').abort();
         }
@@ -2539,17 +2612,14 @@ var $AA = {};
             fields = JSON.stringify(fields);
         }
 
-        var where = [];
         if((typeof table.d.searchValue === 'string' || typeof table.d.searchValue === 'number') && table.d.searchValue.length > 0){
             var cols = table.cols();
             for(var i = 0; i < cols.length; i++){
-                console.log(cols[i]);
                 var scols = table.d.settings.cols;
                 var ss = {};
                 for(var j = 0; j < scols.length; j++){
                     ss[scols[j].name || 0] = scols[j].searchable===false?false:true;
                 }
-                console.log(ss,scols);
                 var name = cols[i].name();
                 if(ss[name]){
                     where.push([[name, 'like', '%'+table.d.searchValue+'%']]);
@@ -2559,7 +2629,6 @@ var $AA = {};
 
         table.d.$checkboxCheckAll.prop('checked', false).change();
         table.loading();
-
         var xhr = $AA[apiName]().links('').fields(fields).limit(limit).page(page).where(where).orderBy(orderBy).orderDir(orderDir).urlSuffix(apiUrlSuffix).format(apiFormat).get().done(function (data) {
             table.pageMax(data.page_count);
             if(apiItemsDir !== false){
@@ -2616,9 +2685,9 @@ var $AA = {};
                                         if (records[i][j][l] !== null && (typeof records[i][j][l] === 'array' || typeof records[i][j][l] === 'object')) {
                                             if($.isArray(records[i][j][l])){
                                                 row.values['customFields.' + l] = records[i][j][l];
-                                                if(records[i][j][l].length > 0){
+                                                /*if(records[i][j][l].length > 0){
                                                     row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + records[i][j][l].join('</li><li>') + '</li></ul>';
-                                                }
+                                                }*/
                                             }else {
                                                 row.values['customFields.' + l] = records[i][j][l]['date'] || records[i][j][l]['value'] || records[i][j][l][Object.keys(records[i][j][l])[0]] || '';
                                             }
@@ -2637,6 +2706,7 @@ var $AA = {};
                     rows.push(row);
                 }
 
+                table.data({records:records});
                 table.deleteRows();
                 var col = table.getColByName('customFields');
                 if(col !== false){
@@ -2662,15 +2732,17 @@ var $AA = {};
             //}
         });
         table.data('xhr', xhr);
+        return xhr;
     }
 })();
 
 (function(){
 
-    $AA.exportTable = function (table) {
+    $AA.exportTable = function (table, settings) {
         if (typeof table === 'undefined') {
             return false;
         }
+        var settings = settings || {};
         var apiName = table.data('apiName');
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var exportFields = table.data('exportFields') || [];
@@ -2685,7 +2757,34 @@ var $AA = {};
             apiUrlSuffix = '';
         }
 
-        var xhr = $AA[apiName]().orderBy(orderBy).orderDir(orderDir).fields(exportFields).urlSuffix(apiUrlSuffix).export().done(function(data, textStatus, jqXHR){
+        var where = [];
+        if((typeof settings.search === 'string' || typeof settings.search === 'number') && settings.search.length > 0){
+            var cols = table.cols();
+            for(var i = 0; i < cols.length; i++){
+                var scols = table.d.settings.cols;
+                var ss = {};
+                for(var j = 0; j < scols.length; j++){
+                    ss[scols[j].name || 0] = scols[j].searchable===false?false:true;
+                }
+                var name = cols[i].name();
+                if(ss[name]){
+                    where.push([[name, 'like', '%'+settings.search+'%']]);
+                }
+            }
+        }
+        if(typeof settings.ids !== 'undefined'){
+            if(where.length > 0){
+                for(var i = 0; i < where.length; i++){
+                    where[i].push(['id', 'in', settings.ids]);
+                }
+            }else {
+                where.push([['id', 'in', settings.ids]]);
+            }
+        }
+
+        console.log(where);
+
+        var xhr = $AA[apiName]().orderBy(orderBy).orderDir(orderDir).fields(exportFields).where(where).urlSuffix(apiUrlSuffix).export().done(function(data, textStatus, jqXHR){
             window.location.href = jqXHR.getResponseHeader('X-Download-Url');
         });
     };

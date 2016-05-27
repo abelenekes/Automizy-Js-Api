@@ -91,7 +91,7 @@ define([
                 t.d.option.order = obj.order; //name:desc
             if (typeof obj.links !== 'undefined')
                 t.d.option.links = obj.links; //milyen linkek kellenek vesszővel
-        }
+        };
         p.getDataFromParameter = p.getDataFromParameter || function(obj){
             var data = {};
             if (obj.fields !== false)
