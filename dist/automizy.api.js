@@ -1067,8 +1067,16 @@ var $AA = {};
 
 
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
-        $AA['refresh'+moduleName] = function () {
+        $AA['refresh'+moduleName+'DefaultOptions'] = {};
+        $AA['refresh'+moduleName] = function (defaultOptions) {
             var newModule = $AA[moduleNameLowerFirst]();
+
+            var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
+            if(typeof options.order !== 'undefined'){
+                $AA['refresh'+moduleName+'DefaultOptions'].order;
+                newModule = newModule.order(options.order);
+            }
+
             $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
             $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
                 $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
@@ -3186,6 +3194,16 @@ var $AA = {};
 
         var xhr = $AA[apiName]().orderBy(orderBy).orderDir(orderDir).fields(exportFields).where(where).urlSuffix(apiUrlSuffix).export().done(function(data, textStatus, jqXHR){
             window.location.href = jqXHR.getResponseHeader('X-Download-Url');
+        });
+    };
+})();
+
+(function(){
+    $AA.dataToOptions = function (data, field, id) {
+        var field = field || 'name';
+        var id = id || 'id';
+        return $.map(data, function(obj){
+            return [[obj[id], obj[field]]]
         });
     };
 })();

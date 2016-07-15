@@ -558,8 +558,16 @@ define([
 
 
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
-        $AA['refresh'+moduleName] = function () {
+        $AA['refresh'+moduleName+'DefaultOptions'] = {};
+        $AA['refresh'+moduleName] = function (defaultOptions) {
             var newModule = $AA[moduleNameLowerFirst]();
+
+            var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
+            if(typeof options.order !== 'undefined'){
+                $AA['refresh'+moduleName+'DefaultOptions'].order;
+                newModule = newModule.order(options.order);
+            }
+
             $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
             $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
                 $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
