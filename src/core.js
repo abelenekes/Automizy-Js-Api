@@ -3,11 +3,13 @@ define([
 ], function () {
     $AA = new function () {
         var t = this;
+        t.xhr = {};
         t.d = {
             version: '0.1.0',
             login:false,
             hasOpenLoginForm:true,
             lastAjaxData:{},
+            data:{},
             ad:{
                 error:function (jqXHR, textStatus, errorThrown) {
                     if(arguments.length === 3) {
@@ -46,7 +48,9 @@ define([
             campaigns: baseUrl + '/campaigns',
             splitTests: baseUrl + '/split-tests',
             newsletters: baseUrl + '/newsletters',
+            automationEmails: baseUrl + '/automations/emails',
             contacts: baseUrl + '/contacts',
+            contactTags: baseUrl + '/contacts/tags',
             customFields: baseUrl + '/custom-fields',
             users: baseUrl + '/users',
             jobs: baseUrl + '/jobs',
@@ -62,6 +66,10 @@ define([
             clients: baseUrl + '/clients',
             updates: baseUrl + '/updates',
             plugins: baseUrl + '/plugins',
+            milestones: baseUrl + '/milestones',
+            leadScores: baseUrl + '/lead-scores',
+            unbounceForms: baseUrl + '/external/unbounce/forms',
+            autoDetectedForms: baseUrl + '/external/unbounce/forms',
 
             emailPreview: baseUrl + '/email-preview'
         };
