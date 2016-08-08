@@ -605,7 +605,7 @@ define([
                     $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
                 });
             }
-            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true){
+            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
                 return $AA.xhr[moduleNameLowerFirst];
             }
             if(typeof options !== 'undefined'){
