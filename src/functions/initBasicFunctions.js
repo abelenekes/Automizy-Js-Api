@@ -3,6 +3,7 @@ define([
     'automizyApi/token'
 ], function ($AA) {
     $AA.initBasicFunctions = function (module, moduleName) {
+
         var module = module || false;
         if (module === false) {
             return false;
@@ -248,6 +249,7 @@ define([
             };
 
         p.insert = p.insert || function (obj, async) {
+                $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -277,6 +279,7 @@ define([
             };
 
         p.update = p.update || function (obj, id, async) {
+                $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -309,6 +312,7 @@ define([
             };
 
         p.delete = p.delete || function (id, async) {
+                $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -558,6 +562,8 @@ define([
 
 
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
             var newModule = $AA[moduleNameLowerFirst]();
@@ -570,6 +576,7 @@ define([
 
             $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
             $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
+                $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
                 $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
                 if(newModule.d.hasEmbedded){
                     var arr = data._embedded[newModule.d.parentName];
@@ -586,6 +593,25 @@ define([
                 }
             });
             return $AA.xhr[moduleNameLowerFirst];
+        };
+        $AA['get'+moduleName] = function (options) {
+            if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true){
+                if(typeof options !== 'undefined'){
+                    return $AA['refresh'+moduleName](options).done(function(){
+                        $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                    });
+                }
+                return $AA['refresh'+moduleName]().done(function(){
+                    $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                });
+            }
+            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true){
+                return $AA.xhr[moduleNameLowerFirst];
+            }
+            if(typeof options !== 'undefined'){
+                return $AA['refresh'+moduleName](options);
+            }
+            return $AA['refresh'+moduleName]();
         };
     };
 })
