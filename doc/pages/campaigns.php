@@ -475,21 +475,24 @@ $AA.campaigns().getClickBrowserPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getOpenDomainPieById</h3>  
+                    <h3>getOpenDomainListById</h3>  
                     <div class='function-description'>
-                        Use this function to get the array representing the pie chart of opens, showing domain statistics of the given campaign.<br>
+                        Use this function to get the object representing the list of opens, showing domain statistics of the given campaign.<br>
+                        You can also use <code>getOpenDomainPieById</code> as an alias.
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
                         <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
                         <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
+                        <code>limit</code>: The maximum number of domains you want to get. Default: <code>false</code>, all domains returned.<br>
+                        <code>uniqueContacts</code>: Set it <code>true</code> to show unique opens only. <code>false</code> by default.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
                 <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
                 <pre class='prettyprint linenums'  data-name='request'>
-//Getting pie chart of opens, showing domain statistics of the first campaign
-$AA.campaigns().getOpenDomainPieById(1);
+//Getting list of opens, showing domain statistics of the first campaign
+$AA.campaigns().getOpenDomainListById(1);
                 </pre>
                 <pre class='prettyprint linenums' data-name='response'>
 {
@@ -503,27 +506,65 @@ $AA.campaigns().getOpenDomainPieById(1);
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getClickDomainPieById</h3>  
+                    <h3>getClickDomainListById</h3>  
                     <div class='function-description'>
-                        Use this function to get the array representing the pie chart of clicks, showing domain statistics of the given campaign.<br>
+                        Use this function to get the object representing the list of clicks, showing domain statistics of the given campaign.<br>
+                        You can also use <code>getClickDomainPieById</code> as an alias.                        
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the campaign you want to inspect.<br>
                         <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
-                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, endpoint will be the current date and time.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format).If <code>false</code>, endpoint will be the current date and time.<br>
+                        <code>limit</code>: The maximum number of domains you want to get. Default: <code>false</code>, all domains returned.<br>
+                        <code>uniqueContacts</code>: Set it <code>true</code> to show unique clicks only. <code>false</code> by default.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
                 <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
                 <pre class='prettyprint linenums'  data-name='request'>
-//Getting pie chart of clicks, showing domain statistics of the first campaign
-$AA.campaigns().getClickDomainPieById(1);
+//Getting list of clicks, showing domain statistics of the first campaign
+$AA.campaigns().getClickDomainListById(1);
                 </pre>
                 <pre class='prettyprint linenums' data-name='response'>
 {
     "gmail.com": 3,
     "hotmail.com": 1,
 }
+                </pre>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
+            </td>
+        </tr>
+        <tr>
+            <td class='function-body'>
+                <article>
+                    <h3>getDomainTopListById</h3>  
+                    <div class='function-description'>
+                        Use this function to get the array showing domain statistics about the number of sent emails in descending order. The data shows how many emails were sent to a particular domain.<br>
+                        <div class='function-paramenters'>Parameters:</div>
+                        <code>id</code>: The id of the campaign you want to inspect.<br>
+                        <code>from</code>: The startpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format). If <code>false</code>, startpoint will be the date when the campaign was sent.<br>
+                        <code>to</code>: The endpoint of the statistics. (date, yyyy-MM-dd hh:mm:ss format).If <code>false</code>, endpoint will be the current date and time.<br>
+                        <code>limit</code>: The maximum number of domains you want to get. Default: <code>false</code>, all domains returned.<br>
+                    </div>
+                </article>
+            </td>
+            <td class='function-example'>
+                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <pre class='prettyprint linenums'  data-name='request'>
+//Getting list about the number of sent emails, showing domain statistics of the first campaign
+$AA.campaigns().getDomainTopListById(1);
+                </pre>
+                <pre class='prettyprint linenums' data-name='response'>
+[
+    {
+        "domain": "gmail.com",
+        "sent": "120",
+    },
+    {
+        "domain": "hotmail.com",
+        "sent": "22",
+    }
+]
                 </pre>
                 <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR' target='blank'>jqXHR</a></div>
             </td>
