@@ -1,7 +1,7 @@
 <section>
     <h2>Introduction</h2>
     <article id='introduction'>
-        <h3>What is AutomizyJs API?</h3>  
+        <h3>What is AutomizyJs API?</h3>
         <div class='paragraph'>
             AutomizyJs API is a wide collection of JavaScript modules which allows easy and fast communication with the software <a href="https://www.automizy.com/" target="_blank">Automizy</a> through API.
         </div>
