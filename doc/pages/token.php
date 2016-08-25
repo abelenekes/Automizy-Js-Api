@@ -1,5 +1,5 @@
 <section>
-    <h2>Token</h2>  
+    <h3>Token</h3>  
     <div class='module-description'>
         These are special functions which can be used on tokens.<br>
         There is a refresh loop running in the background, checking every 30 seconds if the access token is expired or expires in the following 120 seconds. If the token is close to its expiration time, this loop will generate a new one. If it expires the user won't be able to access the server until he gets a new one.<br>

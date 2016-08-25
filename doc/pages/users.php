@@ -1,5 +1,5 @@
 <section>
-    <h2>Users</h2>  
+    <h2>Users</h2>
     <div class='module-description'>
         All <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on users.<br>
         To use the functions you have to invoke the <b>$AA.users()</b> method first.<br>
