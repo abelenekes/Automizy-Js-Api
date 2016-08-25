@@ -5,7 +5,7 @@ define([
 ], function ($AA) {
 
     $AA.refreshTable = function (table) {
-        if (typeof table === 'undefined') {
+        if (typeof table === 'undefined' || table === false) {
             return false;
         }
         var apiName = table.data('apiName');
@@ -23,6 +23,13 @@ define([
         var fields = table.data('fields') || false;
         var showId = false;
         var where = table.data('where') || [];
+        var specialWhereArr = false;
+        if(typeof table.data('whereFunction') === 'function'){
+            var specialWhere = table.data('whereFunction')();
+            if(specialWhere !== false){
+                specialWhereArr = table.data('whereFunction')();
+            }
+        }
         if(typeof table.data('xhr') !== 'undefined'){
             table.data('xhr').abort();
         }
@@ -67,8 +74,18 @@ define([
                 }
                 var name = cols[i].name();
                 if(ss[name]){
-                    where.push([[name, 'like', '%'+table.d.searchValue+'%']]);
+                    var whereArr = [[name, 'like', '%'+table.d.searchValue+'%']];
+                    if(specialWhereArr !== false){
+                        for(var j = 0; j < specialWhereArr.length; j++){
+                            whereArr.push(specialWhereArr[j]);
+                        }
+                    }
+                    where.push(whereArr);
                 }
+            }
+        }else{
+            if(specialWhereArr !== false){
+                where.push(specialWhereArr);
             }
         }
 
@@ -154,7 +171,7 @@ define([
                 table.data({records:records});
                 table.deleteRows();
                 var col = table.getColByName('customFields');
-                if(col !== false){
+                if(col !== false && typeof col.$cells === 'function'){
                     col.$cells().css('display', 'none');
                 }
                 table.rows(rows);

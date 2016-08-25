@@ -438,7 +438,30 @@ define([
             error: $AA.token().error()
         });
     };
-    p.getOpenDomainPieById = function (id, from, to) {
+    p.getDomainTopListById = function (id, from, to, limit) {
+        var t = this;
+        var data = {
+            format:'raw'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        return $.ajax({
+            url: t.d.url + '/' + id + '/domains' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenDomainListById = p.getOpenDomainPieById = function(id, from, to, limit, uniqueContacts){
         var t = this;
         var data = {
             format:'aggregate',
@@ -449,6 +472,12 @@ define([
         }
         if(typeof to !== 'undefined' && to !== false){
             data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        if(typeof uniqueContacts !== 'undefined' && uniqueContacts !== false){
+            data.uniqueContacts = uniqueContacts;
         }
         return $.ajax({
             url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
@@ -459,7 +488,7 @@ define([
             error: $AA.token().error()
         });
     };
-    p.getClickDomainPieById = function (id, from, to) {
+    p.getClickDomainListById = p.getClickDomainPieById = function (id, from, to, limit, uniqueContacts) {
         var t = this;
         var data = {
             format:'aggregate',
@@ -470,6 +499,12 @@ define([
         }
         if(typeof to !== 'undefined' && to !== false){
             data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        if(typeof uniqueContacts !== 'undefined' && uniqueContacts !== false){
+            data.uniqueContacts = uniqueContacts;
         }
         return $.ajax({
             url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
@@ -560,6 +595,18 @@ define([
             dataType: 'json',
             data:data,
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getStatisticsToPdfById = function (id) {
+        var t = this;
+        return $.ajax({
+            url: t.d.url + '/' + id,
+            type: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + $AA.token().get(),
+                Accept: 'application/pdf'
+            },
             error: $AA.token().error()
         });
     };

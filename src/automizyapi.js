@@ -12,6 +12,7 @@ define([
     "automizyApi/apis/campaigns",
     "automizyApi/apis/splitTests",
     "automizyApi/apis/newsletters",
+    "automizyApi/apis/automationEmails",
     "automizyApi/apis/contacts",
     "automizyApi/apis/customFields",
     "automizyApi/apis/users",
@@ -22,6 +23,11 @@ define([
     "automizyApi/apis/automations",
     "automizyApi/apis/contactImports",
     "automizyApi/apis/tags",
+    "automizyApi/apis/milestones",
+    "automizyApi/apis/leadScores",
+    "automizyApi/apis/contactTags",
+    "automizyApi/apis/unbounceForms",
+    "automizyApi/apis/autoDetectedForms",
 
     "automizyApi/apis/account",
     "automizyApi/apis/accountStatistics",
@@ -36,6 +42,7 @@ define([
     "automizyApi/functions/cookie",
     "automizyApi/functions/refreshTable",
     "automizyApi/functions/exportTable",
+    "automizyApi/functions/dataToOptions",
     "automizyApi/functions/downloadContent"
 ], function () {
     console.log('%c AutomizyJsApi module loaded! ', 'background: #000000; color: #bada55; font-size:14px');

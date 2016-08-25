@@ -48,8 +48,6 @@ define([
             }
         }
 
-        console.log(where);
-
         var xhr = $AA[apiName]().orderBy(orderBy).orderDir(orderDir).fields(exportFields).where(where).urlSuffix(apiUrlSuffix).export().done(function(data, textStatus, jqXHR){
             window.location.href = jqXHR.getResponseHeader('X-Download-Url');
         });
