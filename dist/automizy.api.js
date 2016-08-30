@@ -36,9 +36,9 @@ var $AA = {};
             }
         };
 
-        var baseUrl = "https://api.automizy.com";
-        var apiLoginPhp = "https://app.automizy.com/php/login.php";
-        var apiRefreshPhp = "https://app.automizy.com/php/refresh.php";
+        var baseUrl = window.automizyApiBaseUrl || "https://api.automizy.com";
+        var apiLoginPhp = window.automizyApiLoginPhp || "https://app.automizy.com/php/login.php";
+        var apiRefreshPhp = window.automizyApiRefreshPhp || "https://app.automizy.com/php/refresh.php";
         t.u = {
             base:baseUrl,
             loginPhp: apiLoginPhp,
@@ -598,6 +598,8 @@ var $AA = {};
                     t.orderBy(obj.orderBy || obj.order_by);
                 if (typeof obj.orderDir !== 'undefined' || typeof obj.order_dir !== 'undefined')
                     t.orderDir(obj.orderDir || obj.order_dir);
+                if (typeof obj.order !== 'undefined')
+                    t.order(obj.order);
                 if (typeof obj.links !== 'undefined')
                     t.links(obj.links);
                 if (typeof obj.url !== 'undefined')
@@ -1073,20 +1075,18 @@ var $AA = {};
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
         $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
-            var newModule = $AA[moduleNameLowerFirst]();
 
             var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
-            if(typeof options.order !== 'undefined'){
-                $AA['refresh'+moduleName+'DefaultOptions'].order;
-                newModule = newModule.order(options.order);
-            }
+            $AA['refresh'+moduleName+'DefaultOptions'] = options;
+            var newModule = $AA[moduleNameLowerFirst](options);
 
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
             $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
                 $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
-                $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+                $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
                 if(newModule.d.hasEmbedded){
                     var arr = data._embedded[newModule.d.parentName];
                 }else {
@@ -1104,23 +1104,33 @@ var $AA = {};
             return $AA.xhr[moduleNameLowerFirst];
         };
         $AA['get'+moduleName] = function (options) {
+            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
+                return $AA.xhr[moduleNameLowerFirst];
+            }
+            $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
             if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true){
                 if(typeof options !== 'undefined'){
                     return $AA['refresh'+moduleName](options).done(function(){
                         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                     });
                 }
                 return $AA['refresh'+moduleName]().done(function(){
                     $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
-            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true){
+            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
                 return $AA.xhr[moduleNameLowerFirst];
             }
             if(typeof options !== 'undefined'){
-                return $AA['refresh'+moduleName](options);
+                return $AA['refresh'+moduleName](options).done(function(){
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+                });
             }
-            return $AA['refresh'+moduleName]();
+            return $AA['refresh'+moduleName]().done(function(){
+                $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+            });
         };
     };
 })();
@@ -2593,9 +2603,9 @@ var $AA = {};
     $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
     $AA['refresh'+moduleName] = function () {
         var newModule = $AA.automations();
-        $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
+        $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
         $AA.xhr[moduleNameLowerFirst] = newModule.getCampaigns().done(function (data) {
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
             var arr = data;
 
             for (var i = 0; i < arr.length; i++) {
@@ -3231,6 +3241,17 @@ var $AA = {};
         return $.map(data, function(obj){
             return [[obj[id], obj[field]]]
         });
+    };
+})();
+
+(function(){
+    $AA.convertToObj = function (data, keyValue) {
+        var keyValue = keyValue || 'id';
+        var obj = {};
+        for(var i = 0; i < data.length; i++){
+            obj[data[i][keyValue]] = data[i];
+        }
+        return obj;
     };
 })();
 

@@ -131,25 +131,6 @@
                     <h2>Contact us</h2>
                     <div>Email: <a href="mailto:help@automizy.com">help@automizy.com</a></div>
                 </div>
-                <div class='footer-cell'>
-                    <h2>Locations</h2>
-                    <div class='hq-info'>
-                        USA HQ
-                        <div class='location'>
-                            Automizy Inc.<br>
-                            19 W 34th St., Ste. 1018<br>
-                            New York, NY 10001
-                        </div>
-                    </div>
-                    <div class='hq-info'>
-                        Europe HQ
-                        <div class='location'>
-                            Protopmail Zrt.<br>
-                            Könyves K. krt 12-14.<br>
-                            H-1097 Budapest, Hungary
-                        </div>
-                    </div>
-                </div>
                 <div class="copyright">© 2014 Automizy Inc.</div>
             </div>            
         </footer>
@@ -158,7 +139,7 @@
 
 
             <?php
-            /* 
+            /*
             define("EGY", 1);
 
             $alma = 12345;
@@ -167,7 +148,7 @@
             $korte = "korte";
             echo EGY;
             echo "gyumolcs " . $korte;
-            
+
             require("pages/newhtml.html");
             ?>
 

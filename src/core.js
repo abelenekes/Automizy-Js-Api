@@ -36,9 +36,9 @@ define([
             }
         };
 
-        var baseUrl = "https://api.automizy.com";
-        var apiLoginPhp = "https://app.automizy.com/php/login.php";
-        var apiRefreshPhp = "https://app.automizy.com/php/refresh.php";
+        var baseUrl = window.automizyApiBaseUrl || "https://api.automizy.com";
+        var apiLoginPhp = window.automizyApiLoginPhp || "https://app.automizy.com/php/login.php";
+        var apiRefreshPhp = window.automizyApiRefreshPhp || "https://app.automizy.com/php/refresh.php";
         t.u = {
             base:baseUrl,
             loginPhp: apiLoginPhp,
