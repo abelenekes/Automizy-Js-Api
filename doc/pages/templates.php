@@ -1,5 +1,5 @@
 <section>
-    <h2>Templates</h2>  
+    <h2>Templates</h2>
     <div class='module-description'>
         All <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on templates.<br>
         To use the functions you have to invoke the <b>$AA.templates()</b> method first.<br>

@@ -93,6 +93,10 @@ define([
         table.loading();
         var xhr = $AA[apiName]().links('').fields(fields).limit(limit).page(page).where(where).orderBy(orderBy).orderDir(orderDir).urlSuffix(apiUrlSuffix).format(apiFormat).get().done(function (data) {
             table.pageMax(data.page_count);
+            /*
+            table.totalEntries(data.total_items);
+            table.writeEntries();
+            */
             if(apiItemsDir !== false){
                 var dir = apiItemsDir.split('/');
                 var records = data;

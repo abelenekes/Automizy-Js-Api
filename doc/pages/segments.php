@@ -1,5 +1,5 @@
 <section>
-    <h2>Segments</h2>  
+    <h2>Segments</h2>
     <div class='module-description'>
         These are special functions which can be used on segments.<br>
         In addition, all <a class='basicFunctionsLink' href="#BasicFunctions">Basic Functions</a> can be invoked on segments.<br>

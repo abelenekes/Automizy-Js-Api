@@ -1,5 +1,5 @@
 <section>
-    <h2>Basic Functions</h2>  
+    <h2>Basic Functions</h2>
     <div class='module-description'>
         These are global functions which can be used on all modules.
     </div>
@@ -7,17 +7,19 @@
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>insert</h3>  
+                    <h3>insert</h3>
                     <div class='function-description'>
                         Use this function to insert an element.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>obj</code>: the object representing the element you want to insert.<br>
-                        <code>async</code>: Not required, (true by default). Set it false to execute the insertion synchronously.
+                        <code>async</code>: Not required, (true by default). Set it false to execute the insertion
+                        synchronously.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Inserting a new segment
 $AA.segments().insert({name: 'new segment'}, true)
@@ -44,22 +46,26 @@ $AA.segments().insert({name: 'new segment'}, true)
     }
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>insertSync</h3>  
+                    <h3>insertSync</h3>
                     <div class='function-description'>
-                        Use this function to insert an element sychronously. (The browser will wait for the response.)<br>
+                        Use this function to insert an element sychronously. (The browser will wait for the
+                        response.)<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>obj</code>: the object representing the element you want to insert.<br>
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Inserting a new segment sychronously
 $AA.segments().insertSync({name: 'new segment'})
@@ -86,24 +92,28 @@ $AA.segments().insertSync({name: 'new segment'})
     }
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>update</h3>  
+                    <h3>update</h3>
                     <div class='function-description'>
                         Use this function to update a field of an element.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>obj</code>: The field you want to update and the new value.<br>
-                        <code>id</code>: The id of the element you want to update.<br> 
-                        <code>async</code>: Not required, (true by default). Set it false to execute the update process synchronously.
+                        <code>id</code>: The id of the element you want to update.<br>
+                        <code>async</code>: Not required, (true by default). Set it false to execute the update process
+                        synchronously.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Changing the 'name' property of the first segment to 'First segment' asychronously
 $AA.segments().update({'name':'First segment'},1, false);
@@ -130,23 +140,27 @@ $AA.segments().update({'name':'First segment'},1, false);
     }
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>updateSync</h3>  
+                    <h3>updateSync</h3>
                     <div class='function-description'>
-                        Use this function to update a field of an element sychronously. (The browser will wait for the response.)<br>
+                        Use this function to update a field of an element sychronously. (The browser will wait for the
+                        response.)<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>obj</code>: The field you want to update and the new value.<br>
-                        <code>id</code>: The id of the element you want to update.<br> 
+                        <code>id</code>: The id of the element you want to update.<br>
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Changing the 'name' property of the first segment to 'First segment' sychronously
 $AA.segments().update({'name':'First segment'},1);
@@ -173,32 +187,50 @@ $AA.segments().update({'name':'First segment'},1);
     }
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>get</h3>  
+                    <h3>get</h3>
                     <div class='function-description'>
                         Use this function to get the result of any query.<br>
                         The result will be a jqXHR containing the elements which met the query's conditions.<br>
                         There are several modifier methods which can be used before invoking the get() method:<br>
                         <ul>
-                            <li><code>fields('field1, field2')</code>: If set, the response will contain only the value of the given fields.</li>
+                            <li><code>fields('field1, field2')</code>: If set, the response will contain only the value
+                                of the given fields.
+                            </li>
                             <li><code>limit(X)</code>: If set, only the first X results will be returned.</li>
-                            <li><code>links('link1,link')</code>:  If set, only given links of the elements will appear in the result, all other links will be hidden.</li>
-                            <li><code>orderBy('fieldName')</code>: If set, the response will be ordered by the given field name. If you use ths funciton, you must invoke the orderDir() function too.</li>
-                            <li><code>orderDir('orderDirection')</code>: If set ('asc' || 'desc'), the response will be ordered by the given direction. If you use ths funciton, you must invoke the orderBy() function too.</li>
-                            <li><code>order('orderBy:orderDir')</code>: The composite function of the before mentioned ones. If set, the response will be ordered by the given field name and order direction.</li>
-                            <li><code>page(pageNum)</code>: If set, the result will contain only those elements which can be found on the particular page.</li>
-                            <li><code>where(conditionsArr)</code>: You can give condition to the query represented by an array.</li>
+                            <li><code>links('link1,link')</code>: If set, only given links of the elements will appear
+                                in the result, all other links will be hidden.
+                            </li>
+                            <li><code>orderBy('fieldName')</code>: If set, the response will be ordered by the given
+                                field name. If you use ths funciton, you must invoke the orderDir() function too.
+                            </li>
+                            <li><code>orderDir('orderDirection')</code>: If set ('asc' || 'desc'), the response will be
+                                ordered by the given direction. If you use ths funciton, you must invoke the orderBy()
+                                function too.
+                            </li>
+                            <li><code>order('orderBy:orderDir')</code>: The composite function of the before mentioned
+                                ones. If set, the response will be ordered by the given field name and order direction.
+                            </li>
+                            <li><code>page(pageNum)</code>: If set, the result will contain only those elements which
+                                can be found on the particular page.
+                            </li>
+                            <li><code>where(conditionsArr)</code>: You can give condition to the query represented by an
+                                array.
+                            </li>
                         </ul>
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Get all segments
 $AA.segments().get();
@@ -241,20 +273,24 @@ $AA.segments().where([
     ]
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getSync</h3>  
+                    <h3>getSync</h3>
                     <div class='function-description'>
-                        This function is the same as the get() method, but it works synchronously. (The browser will wait for the response.)<br>
+                        This function is the same as the get() method, but it works synchronously. (The browser will
+                        wait for the response.)<br>
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Get all segments synchronously
 $AA.segments().getSync();
@@ -281,21 +317,25 @@ $AA.segments().getSync();
     ]
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getAll</h3>  
+                    <h3>getAll</h3>
                     <div class='function-description'>
                         Use this function to get all records in of the particular module.<br>
-                        If you use this function, it will ignore any modifier functions (like limit or where) and will return all results.
+                        If you use this function, it will ignore any modifier functions (like limit or where) and will
+                        return all results.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Getting all segments
 $AA.segments().limit(1).getAll(); //limit will be ignored!
@@ -322,22 +362,26 @@ $AA.segments().limit(1).getAll(); //limit will be ignored!
     ]
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getAllIdNamePair</h3>  
+                    <h3>getAllIdNamePair</h3>
                     <div class='function-description'>
-                        Use this function to return all elements with their id-s and with their value in the selected field.<br>
+                        Use this function to return all elements with their id-s and with their value in the selected
+                        field.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>fieldName</code>: The field whom value you want to get.<br>
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Getting all segments with their id and name property
 $AA.segments().getAllIdNamePair('name'); 
@@ -357,15 +401,18 @@ $AA.segments().getAllIdNamePair('name');
     ],
 ]
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getFieldById</h3>  
+                    <h3>getFieldById</h3>
                     <div class='function-description'>
-                        Use this function to get the value of the requested field of the record with the particular id.<br>
+                        Use this function to get the value of the requested field of the record with the particular
+                        id.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the record you want to inspect.<br>
                         <code>fieldName</code>: The name of the fild you want to get.<br>
@@ -373,7 +420,8 @@ $AA.segments().getAllIdNamePair('name');
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Returning the name property of the first segment
 $AA.segments().getFieldById(1, 'name');
@@ -382,13 +430,15 @@ $AA.segments().getFieldById(1, 'name');
 //Response is only the requested value
 "test1"
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>getRecordById</h3>  
+                    <h3>getRecordById</h3>
                     <div class='function-description'>
                         Use this function to get a record with the particular id.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -397,7 +447,8 @@ $AA.segments().getFieldById(1, 'name');
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Getting the first segment
 $AA.segments().getRecordById(1);
@@ -423,23 +474,27 @@ $AA.segments().getRecordById(1);
     }
 }
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>delete</h3>  
+                    <h3>delete</h3>
                     <div class='function-description'>
                         Use this function to remove an element by id.<br>
                         <div class='function-paramenters'>Parameters:</div>
                         <code>id</code>: The id of the item you want to remove.<br>
-                        <code>async</code>: Not required, (true by default) set it false to execute the removal synchronously.
+                        <code>async</code>: Not required, (true by default) set it false to execute the removal
+                        synchronously.
                     </div>
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Removing the 3rd segment asynchronously
 $AA.segments().delete(3)
@@ -447,13 +502,15 @@ $AA.segments().delete(3)
                 <pre class='prettyprint linenums' data-name='response'>
 ""
                 </pre>
-                <div class='function-returns'> Returns: <a class='jqrxhr-link' href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a></div>
+                <div class='function-returns'> Returns: <a class='jqrxhr-link'
+                                                           href='http://api.jquery.com/jQuery.ajax/#jqXHR'>jqXHR</a>
+                </div>
             </td>
         </tr>
         <tr>
             <td class='function-body'>
                 <article>
-                    <h3>deleteSync</h3>  
+                    <h3>deleteSync</h3>
                     <div class='function-description'>
                         Use this function to remove an element by id synchronously.<br>
                         <div class='function-paramenters'>Parameters:</div>
@@ -462,7 +519,8 @@ $AA.segments().delete(3)
                 </article>
             </td>
             <td class='function-example'>
-                <div class='example-tab' data-name='request'>Request</div><div class='example-tab'  data-name='response'>Response</div>
+                <div class='example-tab' data-name='request'>Request</div>
+                <div class='example-tab' data-name='response'>Response</div>
                 <pre class='prettyprint linenums' data-name='request'>
 //Removing the 3rd segment synchronously
 $AA.segments().deleteSync(3)
