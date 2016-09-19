@@ -566,7 +566,7 @@ define([
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
         $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
-        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false
+        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
 
@@ -575,7 +575,7 @@ define([
             var newModule = $AA[moduleNameLowerFirst](options);
 
             $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
-            $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
+            $AA.xhr[moduleNameLowerFirst] = newModule.limit(2147483648).get().done(function (data) {
                 $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
                 $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
                 if(newModule.d.hasEmbedded){
@@ -595,10 +595,6 @@ define([
             return $AA.xhr[moduleNameLowerFirst];
         };
         $AA['get'+moduleName] = function (options) {
-            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
-                return $AA.xhr[moduleNameLowerFirst];
-            }
-            $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
             if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true){
                 if(typeof options !== 'undefined'){
                     return $AA['refresh'+moduleName](options).done(function(){
@@ -611,6 +607,10 @@ define([
                     $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
+            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
+                return $AA.xhr[moduleNameLowerFirst];
+            }
+            $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
             if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
                 return $AA.xhr[moduleNameLowerFirst];
             }
@@ -624,5 +624,4 @@ define([
             });
         };
     };
-})
-;
+});
