@@ -14,6 +14,7 @@ define([
         }
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var apiItemsDir = table.data('apiItemsDir');
+        var apiElementsDir = table.data('apiElementsDir');
         var apiFormat = table.data('apiFormat');
         var refreshComplete = table.data('refreshComplete');
         var orderBy = table.d.orderBy;
@@ -38,6 +39,9 @@ define([
         }
         if(typeof apiItemsDir === 'undefined'){
             apiItemsDir = false;
+        }
+        if(typeof apiElementsDir === 'undefined'){
+            apiElementsDir = false;
         }
         if(typeof apiFormat === 'undefined'){
             apiFormat = false;
@@ -97,6 +101,7 @@ define([
             table.totalEntries(data.total_items);
             table.writeEntries();
             */
+
             if(apiItemsDir !== false){
                 var dir = apiItemsDir.split('/');
                 var records = data;
@@ -106,25 +111,30 @@ define([
             }else{
                 var records = data['_embedded'][apiName];
             }
+
             var length = records.length;
             //if (length > 0) {
                 var rows = [];
                 for (var i = 0; i < length; i++) {
-                    var row = {recordId: records[i]['id'] || 0, values: {}};
-                    for (var j in records[i]) {
+                    var record = records[i];
+                    if(apiElementsDir !== false){
+                        record = records[i][apiElementsDir];
+                    }
+                    var row = {recordId: record['id'] || 0, values: {}};
+                    for (var j in record) {
                         if (j.charAt(0) === '_' || (j === 'id' && !showId)) {
                             continue;
                         }
-                        if (records[i][j] !== null && (typeof records[i][j] === 'object' || typeof records[i][j] === 'array')) {
-                            if($.isArray(records[i][j])){
-                                row.values[j] = records[i][j];
+                        if (record[j] !== null && (typeof record[j] === 'object' || typeof record[j] === 'array')) {
+                            if($.isArray(record[j])){
+                                row.values[j] = record[j];
                             }else{
                                 var isDateObj = false;
                                 var dateObjCount = 0;
                                 var isCodeValueObj = false;
                                 var codeValueObjCount = 0;
                                 var isCustomFields = false;
-                                for (var k in records[i][j]) {
+                                for (var k in record[j]) {
                                     if (k === 'date' || k === 'timezone' || k === 'timezone_type') {
                                         dateObjCount++;
                                     }
@@ -143,30 +153,30 @@ define([
                                     }
                                 }
                                 if (isDateObj) {
-                                    row.values[j] = records[i][j]['date'] || records[i][j][Object.keys(records[i][j])[0]] || '';
+                                    row.values[j] = record[j]['date'] || record[j][Object.keys(record[j])[0]] || '';
                                 } else if (isCodeValueObj) {
-                                    row.values[j] = records[i][j]['value'] || records[i][j][Object.keys(records[i][j])[0]] || '';
+                                    row.values[j] = record[j]['value'] || record[j][Object.keys(record[j])[0]] || '';
                                 } else if (isCustomFields) {
-                                    for (var l in records[i][j]) {
-                                        if (records[i][j][l] !== null && (typeof records[i][j][l] === 'array' || typeof records[i][j][l] === 'object')) {
-                                            if($.isArray(records[i][j][l])){
-                                                row.values['customFields.' + l] = records[i][j][l];
-                                                /*if(records[i][j][l].length > 0){
-                                                    row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + records[i][j][l].join('</li><li>') + '</li></ul>';
+                                    for (var l in record[j]) {
+                                        if (record[j][l] !== null && (typeof record[j][l] === 'array' || typeof record[j][l] === 'object')) {
+                                            if($.isArray(record[j][l])){
+                                                row.values['customFields.' + l] = record[j][l];
+                                                /*if(record[j][l].length > 0){
+                                                    row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + record[j][l].join('</li><li>') + '</li></ul>';
                                                 }*/
                                             }else {
-                                                row.values['customFields.' + l] = records[i][j][l]['date'] || records[i][j][l]['value'] || records[i][j][l][Object.keys(records[i][j][l])[0]] || '';
+                                                row.values['customFields.' + l] = record[j][l]['date'] || record[j][l]['value'] || record[j][l][Object.keys(record[j][l])[0]] || '';
                                             }
                                         } else {
-                                            row.values['customFields.' + l] = records[i][j][l];
+                                            row.values['customFields.' + l] = record[j][l];
                                         }
                                     }
                                 } else {
-                                    row.values[j] = records[i][j];
+                                    row.values[j] = record[j];
                                 }
                             }
                         } else {
-                            row.values[j] = records[i][j];
+                            row.values[j] = record[j];
                         }
                     }
                     rows.push(row);

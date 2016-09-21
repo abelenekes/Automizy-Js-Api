@@ -89,6 +89,8 @@ define([
                     t.orderBy(obj.orderBy || obj.order_by);
                 if (typeof obj.orderDir !== 'undefined' || typeof obj.order_dir !== 'undefined')
                     t.orderDir(obj.orderDir || obj.order_dir);
+                if (typeof obj.order !== 'undefined')
+                    t.order(obj.order);
                 if (typeof obj.links !== 'undefined')
                     t.links(obj.links);
                 if (typeof obj.url !== 'undefined')
@@ -564,20 +566,18 @@ define([
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
         $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
-            var newModule = $AA[moduleNameLowerFirst]();
 
             var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
-            if(typeof options.order !== 'undefined'){
-                $AA['refresh'+moduleName+'DefaultOptions'].order;
-                newModule = newModule.order(options.order);
-            }
+            $AA['refresh'+moduleName+'DefaultOptions'] = options;
+            var newModule = $AA[moduleNameLowerFirst](options);
 
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
-            $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
+            $AA.xhr[moduleNameLowerFirst] = newModule.limit(2147483648).get().done(function (data) {
                 $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
-                $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+                $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
                 if(newModule.d.hasEmbedded){
                     var arr = data._embedded[newModule.d.parentName];
                 }else {
@@ -599,20 +599,29 @@ define([
                 if(typeof options !== 'undefined'){
                     return $AA['refresh'+moduleName](options).done(function(){
                         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                     });
                 }
                 return $AA['refresh'+moduleName]().done(function(){
                     $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
+            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
+                return $AA.xhr[moduleNameLowerFirst];
+            }
+            $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
             if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
                 return $AA.xhr[moduleNameLowerFirst];
             }
             if(typeof options !== 'undefined'){
-                return $AA['refresh'+moduleName](options);
+                return $AA['refresh'+moduleName](options).done(function(){
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+                });
             }
-            return $AA['refresh'+moduleName]();
+            return $AA['refresh'+moduleName]().done(function(){
+                $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+            });
         };
     };
-})
-;
+});

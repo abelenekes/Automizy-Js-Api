@@ -125,9 +125,9 @@ define([
     $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
     $AA['refresh'+moduleName] = function () {
         var newModule = $AA.automations();
-        $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
+        $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
         $AA.xhr[moduleNameLowerFirst] = newModule.getCampaigns().done(function (data) {
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
             var arr = data;
 
             for (var i = 0; i < arr.length; i++) {

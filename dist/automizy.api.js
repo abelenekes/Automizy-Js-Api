@@ -36,9 +36,9 @@ var $AA = {};
             }
         };
 
-        var baseUrl = "https://api.automizy.com";
-        var apiLoginPhp = "https://app.automizy.com/php/login.php";
-        var apiRefreshPhp = "https://app.automizy.com/php/refresh.php";
+        var baseUrl = window.automizyApiBaseUrl || "https://api.automizy.com";
+        var apiLoginPhp = window.automizyApiLoginPhp || "https://app.automizy.com/php/login.php";
+        var apiRefreshPhp = window.automizyApiRefreshPhp || "https://app.automizy.com/php/refresh.php";
         t.u = {
             base:baseUrl,
             loginPhp: apiLoginPhp,
@@ -598,6 +598,8 @@ var $AA = {};
                     t.orderBy(obj.orderBy || obj.order_by);
                 if (typeof obj.orderDir !== 'undefined' || typeof obj.order_dir !== 'undefined')
                     t.orderDir(obj.orderDir || obj.order_dir);
+                if (typeof obj.order !== 'undefined')
+                    t.order(obj.order);
                 if (typeof obj.links !== 'undefined')
                     t.links(obj.links);
                 if (typeof obj.url !== 'undefined')
@@ -1073,20 +1075,18 @@ var $AA = {};
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
         $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
-            var newModule = $AA[moduleNameLowerFirst]();
 
             var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
-            if(typeof options.order !== 'undefined'){
-                $AA['refresh'+moduleName+'DefaultOptions'].order;
-                newModule = newModule.order(options.order);
-            }
+            $AA['refresh'+moduleName+'DefaultOptions'] = options;
+            var newModule = $AA[moduleNameLowerFirst](options);
 
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
-            $AA.xhr[moduleNameLowerFirst] = newModule.get().done(function (data) {
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
+            $AA.xhr[moduleNameLowerFirst] = newModule.limit(2147483648).get().done(function (data) {
                 $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
-                $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+                $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
                 if(newModule.d.hasEmbedded){
                     var arr = data._embedded[newModule.d.parentName];
                 }else {
@@ -1108,19 +1108,29 @@ var $AA = {};
                 if(typeof options !== 'undefined'){
                     return $AA['refresh'+moduleName](options).done(function(){
                         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                        $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                     });
                 }
                 return $AA['refresh'+moduleName]().done(function(){
                     $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
-            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true){
+            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
+                return $AA.xhr[moduleNameLowerFirst];
+            }
+            $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
+            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
                 return $AA.xhr[moduleNameLowerFirst];
             }
             if(typeof options !== 'undefined'){
-                return $AA['refresh'+moduleName](options);
+                return $AA['refresh'+moduleName](options).done(function(){
+                    $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+                });
             }
-            return $AA['refresh'+moduleName]();
+            return $AA['refresh'+moduleName]().done(function(){
+                $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
+            });
         };
     };
 })();
@@ -2593,9 +2603,9 @@ var $AA = {};
     $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
     $AA['refresh'+moduleName] = function () {
         var newModule = $AA.automations();
-        $AAE.xhr[moduleNameLowerFirst + 'Running'] = true;
+        $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
         $AA.xhr[moduleNameLowerFirst] = newModule.getCampaigns().done(function (data) {
-            $AAE.xhr[moduleNameLowerFirst + 'Running'] = false;
+            $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
             var arr = data;
 
             for (var i = 0; i < arr.length; i++) {
@@ -2988,6 +2998,7 @@ var $AA = {};
         }
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var apiItemsDir = table.data('apiItemsDir');
+        var apiElementsDir = table.data('apiElementsDir');
         var apiFormat = table.data('apiFormat');
         var refreshComplete = table.data('refreshComplete');
         var orderBy = table.d.orderBy;
@@ -3012,6 +3023,9 @@ var $AA = {};
         }
         if(typeof apiItemsDir === 'undefined'){
             apiItemsDir = false;
+        }
+        if(typeof apiElementsDir === 'undefined'){
+            apiElementsDir = false;
         }
         if(typeof apiFormat === 'undefined'){
             apiFormat = false;
@@ -3067,6 +3081,11 @@ var $AA = {};
         table.loading();
         var xhr = $AA[apiName]().links('').fields(fields).limit(limit).page(page).where(where).orderBy(orderBy).orderDir(orderDir).urlSuffix(apiUrlSuffix).format(apiFormat).get().done(function (data) {
             table.pageMax(data.page_count);
+            /*
+            table.totalEntries(data.total_items);
+            table.writeEntries();
+            */
+
             if(apiItemsDir !== false){
                 var dir = apiItemsDir.split('/');
                 var records = data;
@@ -3076,25 +3095,30 @@ var $AA = {};
             }else{
                 var records = data['_embedded'][apiName];
             }
+
             var length = records.length;
             //if (length > 0) {
                 var rows = [];
                 for (var i = 0; i < length; i++) {
-                    var row = {recordId: records[i]['id'] || 0, values: {}};
-                    for (var j in records[i]) {
+                    var record = records[i];
+                    if(apiElementsDir !== false){
+                        record = records[i][apiElementsDir];
+                    }
+                    var row = {recordId: record['id'] || 0, values: {}};
+                    for (var j in record) {
                         if (j.charAt(0) === '_' || (j === 'id' && !showId)) {
                             continue;
                         }
-                        if (records[i][j] !== null && (typeof records[i][j] === 'object' || typeof records[i][j] === 'array')) {
-                            if($.isArray(records[i][j])){
-                                row.values[j] = records[i][j];
+                        if (record[j] !== null && (typeof record[j] === 'object' || typeof record[j] === 'array')) {
+                            if($.isArray(record[j])){
+                                row.values[j] = record[j];
                             }else{
                                 var isDateObj = false;
                                 var dateObjCount = 0;
                                 var isCodeValueObj = false;
                                 var codeValueObjCount = 0;
                                 var isCustomFields = false;
-                                for (var k in records[i][j]) {
+                                for (var k in record[j]) {
                                     if (k === 'date' || k === 'timezone' || k === 'timezone_type') {
                                         dateObjCount++;
                                     }
@@ -3113,30 +3137,30 @@ var $AA = {};
                                     }
                                 }
                                 if (isDateObj) {
-                                    row.values[j] = records[i][j]['date'] || records[i][j][Object.keys(records[i][j])[0]] || '';
+                                    row.values[j] = record[j]['date'] || record[j][Object.keys(record[j])[0]] || '';
                                 } else if (isCodeValueObj) {
-                                    row.values[j] = records[i][j]['value'] || records[i][j][Object.keys(records[i][j])[0]] || '';
+                                    row.values[j] = record[j]['value'] || record[j][Object.keys(record[j])[0]] || '';
                                 } else if (isCustomFields) {
-                                    for (var l in records[i][j]) {
-                                        if (records[i][j][l] !== null && (typeof records[i][j][l] === 'array' || typeof records[i][j][l] === 'object')) {
-                                            if($.isArray(records[i][j][l])){
-                                                row.values['customFields.' + l] = records[i][j][l];
-                                                /*if(records[i][j][l].length > 0){
-                                                    row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + records[i][j][l].join('</li><li>') + '</li></ul>';
+                                    for (var l in record[j]) {
+                                        if (record[j][l] !== null && (typeof record[j][l] === 'array' || typeof record[j][l] === 'object')) {
+                                            if($.isArray(record[j][l])){
+                                                row.values['customFields.' + l] = record[j][l];
+                                                /*if(record[j][l].length > 0){
+                                                    row.values['customFields.' + l] = '<ul style="margin: 0; padding-left: 17px;"><li>' + record[j][l].join('</li><li>') + '</li></ul>';
                                                 }*/
                                             }else {
-                                                row.values['customFields.' + l] = records[i][j][l]['date'] || records[i][j][l]['value'] || records[i][j][l][Object.keys(records[i][j][l])[0]] || '';
+                                                row.values['customFields.' + l] = record[j][l]['date'] || record[j][l]['value'] || record[j][l][Object.keys(record[j][l])[0]] || '';
                                             }
                                         } else {
-                                            row.values['customFields.' + l] = records[i][j][l];
+                                            row.values['customFields.' + l] = record[j][l];
                                         }
                                     }
                                 } else {
-                                    row.values[j] = records[i][j];
+                                    row.values[j] = record[j];
                                 }
                             }
                         } else {
-                            row.values[j] = records[i][j];
+                            row.values[j] = record[j];
                         }
                     }
                     rows.push(row);
@@ -3231,6 +3255,17 @@ var $AA = {};
         return $.map(data, function(obj){
             return [[obj[id], obj[field]]]
         });
+    };
+})();
+
+(function(){
+    $AA.convertToObj = function (data, keyValue) {
+        var keyValue = keyValue || 'id';
+        var obj = {};
+        for(var i = 0; i < data.length; i++){
+            obj[data[i][keyValue]] = data[i];
+        }
+        return obj;
     };
 })();
 

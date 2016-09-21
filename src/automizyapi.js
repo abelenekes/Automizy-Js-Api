@@ -43,6 +43,7 @@ define([
     "automizyApi/functions/refreshTable",
     "automizyApi/functions/exportTable",
     "automizyApi/functions/dataToOptions",
+    "automizyApi/functions/convertToObj",
     "automizyApi/functions/downloadContent"
 ], function () {
     console.log('%c AutomizyJsApi module loaded! ', 'background: #000000; color: #bada55; font-size:14px');

@@ -131,6 +131,7 @@
                     <h2>Contact us</h2>
                     <div>Email: <a href="mailto:help@automizy.com">help@automizy.com</a></div>
                 </div>
+                <div class="copyright">© 2014 Automizy Inc.</div>
             </div>            
         </footer>
     </body>
@@ -138,7 +139,7 @@
 
 
             <?php
-            /* 
+            /*
             define("EGY", 1);
 
             $alma = 12345;
@@ -147,7 +148,7 @@
             $korte = "korte";
             echo EGY;
             echo "gyumolcs " . $korte;
-            
+
             require("pages/newhtml.html");
             ?>
 
