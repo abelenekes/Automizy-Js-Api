@@ -761,6 +761,7 @@ var $AA = {};
 
         p.insert = p.insert || function (obj, async) {
                 $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
+                $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -791,6 +792,7 @@ var $AA = {};
 
         p.update = p.update || function (obj, id, async) {
                 $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
+                $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -824,6 +826,7 @@ var $AA = {};
 
         p.delete = p.delete || function (id, async) {
                 $AA.xhr[moduleNameLowerFirst + 'Modified'] = true;
+                $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = true;
                 var t = this;
                 if (typeof async !== 'undefined') {
                     async = $AA.parseBoolean(async);
@@ -1075,6 +1078,7 @@ var $AA = {};
         $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
         $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = false;
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
+        $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = false;
         $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
         $AA['refresh'+moduleName+'DefaultOptions'] = {};
         $AA['refresh'+moduleName] = function (defaultOptions) {
@@ -1104,7 +1108,8 @@ var $AA = {};
             return $AA.xhr[moduleNameLowerFirst];
         };
         $AA['get'+moduleName] = function (options) {
-            if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true){
+            if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true && $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] === true){
+                $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = false;
                 if(typeof options !== 'undefined'){
                     return $AA['refresh'+moduleName](options).done(function(){
                         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
