@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Contacts = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.contacts
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
@@ -23,7 +17,7 @@ define([
     p.getActivitiesById = function(id){
         var t = this;
         return $.ajax({
-            url: t.d.url + '/' + id + '/activities',
+            url: t.url() + '/' + id + '/activities',
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -31,6 +25,9 @@ define([
         });
     };
     
-    $AA.initBasicFunctions(Contacts, "Contacts");
+    $AA.initBasicFunctions(Contacts, "Contacts", {
+        url:'contacts',
+        useBaseUrl:true
+    });
 
 });

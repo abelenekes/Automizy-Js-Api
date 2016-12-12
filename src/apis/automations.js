@@ -1,14 +1,12 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Automations = function (obj) {
         var t = this;
         t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.automations,
             xhr:{}
         };
         t.init();
@@ -19,10 +17,7 @@ define([
         t.d.xhr.acceptDraft = false;
         t.d.xhr.discardDraft = false;
 
-
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
@@ -31,7 +26,7 @@ define([
     p.getNodesById = function(automationId){
         var t = this;
         t.d.xhr.getNodesById = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/nodes',
+            url: $AA.automationsUrl() + '/' + automationId + '/nodes',
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -42,7 +37,7 @@ define([
     p.insertNode = function(obj, automationId){
         var t = this;
         t.d.xhr.insertNode = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/nodes',
+            url: $AA.automationsUrl() + '/' + automationId + '/nodes',
             type: 'POST',
             dataType: 'json',
             data: obj,
@@ -62,7 +57,7 @@ define([
             keepParameter = '?keep='+keep
         }
         t.d.xhr.deleteNode = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/nodes/' + nodeId + keepParameter,
+            url: $AA.automationsUrl() + '/' + automationId + '/nodes/' + nodeId + keepParameter,
             type: 'DELETE',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -73,7 +68,7 @@ define([
     p.updateNode = function(obj, automationId, nodeId){
         var t = this;
         t.d.xhr.updateNode = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/nodes/' + nodeId,
+            url: $AA.automationsUrl() + '/' + automationId + '/nodes/' + nodeId,
             type: 'PATCH',
             dataType: 'json',
             data: obj,
@@ -85,7 +80,7 @@ define([
     p.acceptDraft = function(automationId){
         var t = this;
         t.d.xhr.acceptDraft = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/accept-draft',
+            url: $AA.automationsUrl() + '/' + automationId + '/accept-draft',
             type: 'POST',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -96,7 +91,7 @@ define([
     p.discardDraft = function(automationId){
         var t = this;
         t.d.xhr.discardDraft = $.ajax({
-            url: $AA.u.automations + '/' + automationId + '/discard-draft',
+            url: $AA.automationsUrl() + '/' + automationId + '/discard-draft',
             type: 'POST',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -107,7 +102,7 @@ define([
     p.getCampaigns = function(){
         var t = this;
         return $.ajax({
-            url: t.d.url + '/get-campaigns',
+            url: $AA.automationsUrl() + '/get-campaigns',
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -137,7 +132,9 @@ define([
         return $AA.xhr[moduleNameLowerFirst];
     };
 
-    
-    $AA.initBasicFunctions(Automations, "Automations");
+    $AA.initBasicFunctions(Automations, "Automations", {
+        url:'automations',
+        useBaseUrl:true
+    });
 
 });

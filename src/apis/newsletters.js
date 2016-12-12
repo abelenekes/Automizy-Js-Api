@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Newsletters = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.newsletters
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
     var p = Newsletters.prototype;
@@ -41,6 +35,9 @@ define([
 
 
 
-    $AA.initBasicFunctions(Newsletters, "Newsletters");
+    $AA.initBasicFunctions(Newsletters, "Newsletters", {
+        url:'newsletters',
+        useBaseUrl:true
+    });
 
 });

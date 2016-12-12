@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Forms = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.forms
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
@@ -33,7 +27,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/conversion' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/conversion' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -43,6 +37,9 @@ define([
     };
 
     
-    $AA.initBasicFunctions(Forms, "Forms");
+    $AA.initBasicFunctions(Forms, "Forms", {
+        url:'forms',
+        useBaseUrl:true
+    });
 
 });

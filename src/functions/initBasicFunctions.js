@@ -2,7 +2,7 @@ define([
     'automizyApi/core',
     'automizyApi/token'
 ], function ($AA) {
-    $AA.initBasicFunctions = function (module, moduleName) {
+    $AA.initBasicFunctions = function (module, moduleName, settings) {
 
         var module = module || false;
         if (module === false) {
@@ -14,12 +14,16 @@ define([
         var moduleNameLower = moduleName.toLowerCase();
         var moduleNameLowerFirst = moduleName.charAt(0).toLowerCase() + moduleName.slice(1);
 
+        var settings = settings || {};
+
 
         var p = module.prototype;
 
         p.init = p.init || function () {
                 var t = this;
-                
+
+                t.d = t.d || {};
+                t.d.option = t.d.option || {};
                 t.d.xhr = t.d.xhr || {};
                 t.d.xhr.get = false;
                 t.d.xhr.insert = false;
@@ -93,8 +97,6 @@ define([
                     t.order(obj.order);
                 if (typeof obj.links !== 'undefined')
                     t.links(obj.links);
-                if (typeof obj.url !== 'undefined')
-                    t.url(obj.url);
             };
 
         p.setOptions = p.setOptions || function (obj) {
@@ -172,7 +174,7 @@ define([
                 }
 
                 t.d.xhr.get = $.ajax({
-                    url: t.d.url + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + t.d.urlSuffix,
                     type: 'GET',
                     dataType: 'json',
                     async: async,
@@ -233,7 +235,7 @@ define([
                         }, false);
                         return xhr;
                     },
-                    url: t.d.url + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + t.d.urlSuffix,
                     type: 'GET',
                     //dataType: 'json',
                     async: async,
@@ -263,7 +265,7 @@ define([
                 var data = obj;
 
                 t.d.xhr.insert = $.ajax({
-                    url: t.d.url + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + t.d.urlSuffix,
                     type: 'POST',
                     dataType: 'json',
                     async: async,
@@ -296,7 +298,7 @@ define([
                 delete data.id;
 
                 t.d.xhr.update = $.ajax({
-                    url: t.d.url + '/' + id + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + '/' + id + t.d.urlSuffix,
                     type: 'PATCH',
                     dataType: 'json',
                     async: async,
@@ -326,7 +328,7 @@ define([
                 }
 
                 t.d.xhr.delete = $.ajax({
-                    url: t.d.url + '/' + id + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + '/' + id + t.d.urlSuffix,
                     type: 'DELETE',
                     dataType: 'json',
                     async: async,
@@ -365,7 +367,7 @@ define([
         p.getAll = p.getAll || function () {
                 var t = this;
                 t.d.xhr.getAll = $.ajax({
-                    url: t.d.url + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + t.d.urlSuffix,
                     type: 'GET',
                     dataType: 'json',
                     headers: {Authorization: 'Bearer ' + $AA.token().get()},
@@ -389,7 +391,7 @@ define([
                 }
 
                 t.d.xhr.getRecordById = $.ajax({
-                    url: t.d.url + '/' + id + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + '/' + id + t.d.urlSuffix,
                     type: 'GET',
                     dataType: 'json',
                     data: data,
@@ -402,7 +404,7 @@ define([
                 var t = this;
                 var fieldTree = fieldName.split('.');
                 t.d.xhr.getFieldById = $.ajax({
-                    url: t.d.url + '/' + id + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + '/' + id + t.d.urlSuffix,
                     type: 'GET',
                     dataType: 'json',
                     data: {fields: fieldTree[0], links: ''},
@@ -424,7 +426,7 @@ define([
                 var t = this;
                 var fieldTree = nameFieldName.split('.');
                 t.d.xhr.getAllIdNamePair = $.ajax({
-                    url: t.d.url + t.d.urlSuffix,
+                    url: $AA[moduleNameLowerFirst + 'Url']() + t.d.urlSuffix,
                     type: 'GET',
                     dataType: 'json',
                     data: {fields: 'id,' + fieldTree[0], links: ''},
@@ -557,6 +559,12 @@ define([
                 }
                 return t.d.option.set;
             };
+        p.url = p.url || function(){
+                return $AA[moduleNameLowerFirst+'Url'].apply(this, arguments);
+            };
+
+
+        $AA.createUrl(moduleNameLowerFirst)(settings.url || 'ping', !(typeof settings.useBaseUrl !== 'undefined' && settings.useBaseUrl === false));
 
         $AA.m[moduleName] = module;
         $AA[moduleNameLowerFirst] = function (obj) {

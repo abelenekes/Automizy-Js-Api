@@ -1,4 +1,3 @@
-
 define([
     'automizyApi/core',
     'automizyApi/token'

@@ -1,5 +1,6 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/cookie',
     'automizyApi/functions/date'
 ], function () {
@@ -110,7 +111,7 @@ define([
         var t = this;
         return $.ajax({
             type: "POST",
-            url: $AA.u.refreshPhp,
+            url: $AA.refreshUrl(),
             data: {
                 refresh_token: $AA.cookie.get('AutomizyApiRefreshToken'),
                 username: $AA.cookie.get('AutomizyApiUsername')
@@ -196,6 +197,7 @@ define([
         }
 
         $AA.cookie.set('AutomizyApiUsername', obj.username, t.cookieAttributes());
+        $AA.cookie.set('automizyLoginPageUrl', $AA.loginPageUrl(), t.cookieAttributes());
 
         var data = {
             username: obj.username,
@@ -207,7 +209,7 @@ define([
 
         return $.ajax({
             type: "POST",
-            url: $AA.u.loginPhp,
+            url: $AA.loginUrl(),
             data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
@@ -244,7 +246,7 @@ define([
 
         return $.ajax({
             type: "POST",
-            url: $AA.u.oauth,
+            url: $AA.oauthUrl(),
             data: data,
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
@@ -273,10 +275,12 @@ define([
 
     p.cookieAttributes = function(){
         var obj = {};
-        if(location.href.indexOf('.protopmail.com') >= 0){
+        if(location.host.indexOf('.protopmail.com') >= 0){
             obj.domain = '.protopmail.com';
-        }else if(location.href.indexOf('.automizy.com') >= 0){
+        }else if(location.host.indexOf('.automizy.com') >= 0){
             obj.domain = '.automizy.com';
+        }else{
+            obj.domain = location.hostname;
         }
         return obj;
     };

@@ -28,6 +28,8 @@ define([
     "automizyApi/apis/contactTags",
     "automizyApi/apis/unbounceForms",
     "automizyApi/apis/autoDetectedForms",
+    "automizyApi/apis/invoices",
+    "automizyApi/apis/contactsTagManager",
 
     "automizyApi/apis/account",
     "automizyApi/apis/accountStatistics",
@@ -44,7 +46,9 @@ define([
     "automizyApi/functions/exportTable",
     "automizyApi/functions/dataToOptions",
     "automizyApi/functions/convertToObj",
+    "automizyApi/functions/urlManager",
     "automizyApi/functions/downloadContent"
 ], function () {
+    $AA.createUrl('account')('account', true);
     console.log('%c AutomizyJsApi module loaded! ', 'background: #000000; color: #bada55; font-size:14px');
 });

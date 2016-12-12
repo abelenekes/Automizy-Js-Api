@@ -4,6 +4,7 @@ define([
     $AA = new function () {
         var t = this;
         t.xhr = {};
+        t.url = {};
         t.d = {
             version: '0.1.0',
             login:false,
@@ -36,42 +37,46 @@ define([
             }
         };
 
-        var baseUrl = window.automizyApiBaseUrl || "https://api.automizy.com";
-        var apiLoginPhp = window.automizyApiLoginPhp || "https://app.automizy.com/php/login.php";
-        var apiRefreshPhp = window.automizyApiRefreshPhp || "https://app.automizy.com/php/refresh.php";
-        t.u = {
-            base:baseUrl,
-            loginPhp: apiLoginPhp,
-            refreshPhp: apiRefreshPhp,
-            oauth: baseUrl + '/oauth',
-            segments: baseUrl + '/segments',
-            campaigns: baseUrl + '/campaigns',
-            splitTests: baseUrl + '/split-tests',
-            newsletters: baseUrl + '/newsletters',
-            automationEmails: baseUrl + '/automations/emails',
-            contacts: baseUrl + '/contacts',
-            contactTags: baseUrl + '/contacts/tags',
-            customFields: baseUrl + '/custom-fields',
-            users: baseUrl + '/users',
-            jobs: baseUrl + '/jobs',
-            webhooks: baseUrl + '/webhooks',
-            images: baseUrl + '/images',
-            templates: baseUrl + '/templates',
-            forms: baseUrl + '/forms',
-            automations: baseUrl + '/automations',
-            account: baseUrl + '/account',
-            accountStatistics: baseUrl + '/account/statistics',
-            contactImports: baseUrl + '/contact-imports',
-            tags: baseUrl + '/tags',
-            clients: baseUrl + '/clients',
-            updates: baseUrl + '/updates',
-            plugins: baseUrl + '/plugins',
-            milestones: baseUrl + '/milestones',
-            leadScores: baseUrl + '/lead-scores',
-            unbounceForms: baseUrl + '/external/unbounce/forms',
-            autoDetectedForms: baseUrl + '/external/unbounce/forms',
 
-            emailPreview: baseUrl + '/email-preview'
+        var baseApiUrl = window.automizyApiBaseUrl || window.AutomizyBaseApiUrl || "https://api.automizy.com";
+        var loginApiUrl = window.automizyApiLoginPhp || window.AutomizyLoginApiUrl || "https://login.automizy.com/api/login.php";
+        var refreshApiUrl = window.automizyApiRefreshPhp || window.AutomizyRefreshApiUrl || "https://login.automizy.com/api/refresh.php";
+
+        t.u = {
+            //base:baseApiUrl,
+            //loginPhp: loginApiUrl,
+            //refreshPhp: refreshApiUrl,
+            //oauth: baseUrl + '/oauth',
+            //segments: baseUrl + '/segments',
+            //campaigns: baseUrl + '/campaigns',
+            //splitTests: baseUrl + '/split-tests',
+            //newsletters: baseUrl + '/newsletters',
+            //automationEmails: baseUrl + '/automations/emails',
+            //contacts: baseUrl + '/contacts',
+            //contactTags: baseUrl + '/contacts/tags',
+            //contactsTagManager: baseUrl + '/contacts/tag-manager',
+            //customFields: baseUrl + '/custom-fields',
+            //users: baseUrl + '/users',
+            //jobs: baseUrl + '/jobs',
+            //webhooks: baseUrl + '/webhooks',
+            //images: baseUrl + '/images',
+            //templates: baseUrl + '/templates',
+            //forms: baseUrl + '/forms',
+            //automations: baseUrl + '/automations',
+            //account: baseUrl + '/account',
+            //accountStatistics: baseUrl + '/account/statistics',
+            //contactImports: baseUrl + '/contact-imports',
+            //tags: baseUrl + '/tags',
+            //clients: baseUrl + '/clients',
+            //updates: baseUrl + '/updates',
+            //plugins: baseUrl + '/plugins',
+            //milestones: baseUrl + '/milestones',
+            //leadScores: baseUrl + '/lead-scores',
+            //unbounceForms: baseUrl + '/external/unbounce/forms',
+            //autoDetectedForms: baseUrl + '/forms/autodetect',
+            //invoices: baseUrl + '/invoices',
+
+            //emailPreview: baseUrl + '/email-preview'
         };
 
         t.m = [];

@@ -4,10 +4,11 @@ define([
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
-    var UnbounceForms = function (obj) {
+    var ContactsTagManager = function (obj) {
         var t = this;
         t.d = {
-            hasEmbedded:false
+            hasEmbedded:false,
+            hasId:false
         };
         t.init();
 
@@ -15,11 +16,10 @@ define([
     };
 
 
-    var p = UnbounceForms.prototype;
-
+    var p = ContactsTagManager.prototype;
     
-    $AA.initBasicFunctions(UnbounceForms, "UnbounceForms", {
-        url:'external/unbounce/forms',
+    $AA.initBasicFunctions(ContactsTagManager, "ContactsTagManager", {
+        url:'contacts/tag-manager',
         useBaseUrl:true
     });
 

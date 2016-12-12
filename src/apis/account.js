@@ -1,13 +1,13 @@
 define([
     'automizyApi/core',
-    'automizyApi/token'
+    'automizyApi/functions/urlManager'
 ], function () {
     var Account = function (obj) {};
 
     var p = Account.prototype;
     p.get = function(){
         return $.ajax({
-            url: $AA.u.account,
+            url: $AA.accountUrl(),
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()}
@@ -15,7 +15,7 @@ define([
     };
     p.limits = function(){
         return $.ajax({
-            url: $AA.u.account + '/limits',
+            url: $AA.accountUrl() + '/limits',
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()}
@@ -23,7 +23,7 @@ define([
     };
     p.getPackages  = function(){
         return $.ajax({
-            url: $AA.u.account + '/limits',
+            url: $AA.accountUrl() + '/limits',
             type: 'GET',
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()}
@@ -32,6 +32,7 @@ define([
 
     /* No Rest-Api, so the basic functions are disabled */
 
+    $AA.createUrl('account')('account', true);
     $AA.m['Account'] = Account;
     $AA['account'] = function (obj) {
         var t = new Account(obj);
