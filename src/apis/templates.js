@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Templates = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.templates
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
     var p = Templates.prototype;
@@ -38,6 +32,9 @@ define([
     };
 
     
-    $AA.initBasicFunctions(Templates, "Templates");
+    $AA.initBasicFunctions(Templates, "Templates", {
+        url:'templates',
+        useBaseUrl:true
+    });
 
 });

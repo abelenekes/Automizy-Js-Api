@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Segments = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.segments
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
@@ -22,7 +16,7 @@ define([
     p.calculateByArray = function(arr){
         var t = this;
         return $.ajax({
-            url: t.d.url+'/calculate' + t.d.urlSuffix,
+            url: t.url()+'/calculate' + t.d.urlSuffix,
             type: 'GET',
             data: arr,
             dataType: 'json',
@@ -30,11 +24,10 @@ define([
             error: $AA.token().error()
         });
     };
-/**/
     p.calculateById = function(id){
         var t = this;
         return $.ajax({
-            url: t.d.url+'/'+id+'/calculate' + t.d.urlSuffix,
+            url: t.url()+'/'+id+'/calculate' + t.d.urlSuffix,
             type: 'GET',
             data: {
                 waitForResponse:true,
@@ -48,7 +41,7 @@ define([
     p.calculateAndSave = function(id){
         var t = this;
         return $.ajax({
-            url: t.d.url+'/'+id+'/calculate' + t.d.urlSuffix,
+            url: t.url()+'/'+id+'/calculate' + t.d.urlSuffix,
             type: 'GET',
             data: {
                 waitForResponse:true,
@@ -60,6 +53,9 @@ define([
         });
     };
     
-    $AA.initBasicFunctions(Segments, "Segments");
+    $AA.initBasicFunctions(Segments, "Segments", {
+        url:'segments',
+        useBaseUrl:true
+    });
 
 });

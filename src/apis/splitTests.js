@@ -1,20 +1,14 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var SplitTests = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.splitTests
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
@@ -32,7 +26,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -52,7 +46,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -72,7 +66,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/shares' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/shares' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -92,7 +86,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/unsubscribes' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/unsubscribes' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -112,7 +106,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/bounces' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/bounces' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -132,7 +126,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/geo-locations' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/geo-locations' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -155,7 +149,7 @@ define([
             data.step = step;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -178,7 +172,7 @@ define([
             data.step = step;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -199,7 +193,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -220,7 +214,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -241,7 +235,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -262,7 +256,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -283,7 +277,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -304,7 +298,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -325,7 +319,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/opens' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -346,7 +340,7 @@ define([
             data.to = to;
         }
         return $.ajax({
-            url: t.d.url + '/' + id + '/clicks' + t.d.urlSuffix,
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
             type: 'GET',
             dataType: 'json',
             data: data,
@@ -355,7 +349,10 @@ define([
         });
     };
     
-    $AA.initBasicFunctions(SplitTests, "SplitTests");
+    $AA.initBasicFunctions(SplitTests, "SplitTests", {
+        url:'split-tests',
+        useBaseUrl:true
+    });
     p.send = p.insert;
 
 });

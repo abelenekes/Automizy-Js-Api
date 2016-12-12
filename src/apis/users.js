@@ -1,30 +1,24 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var Users = function (obj) {
         var t = this;
-        t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.users
-        };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
 
     var p = Users.prototype;
 
-    p.switch = function(user){
+    p.switch = function(site){
         return $.ajax({
-            url: $AA.u.users + '/switch-site',
+            url: t.url() + '/switch-site',
             type: 'POST',
-            data:{site:user},
+            data:{site:site},
             dataType: 'json',
             headers: {Authorization: 'Bearer ' + $AA.token().get()}
         }).done(function(data) {
@@ -35,6 +29,9 @@ define([
         });
     };
     
-    $AA.initBasicFunctions(Users, "Users");
+    $AA.initBasicFunctions(Users, "Users", {
+        url:'users',
+        useBaseUrl:true
+    });
 
 });

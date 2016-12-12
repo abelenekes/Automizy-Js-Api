@@ -1,21 +1,17 @@
 define([
     'automizyApi/core',
+    'automizyApi/functions/urlManager',
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
     var AutomationEmails = function (obj) {
         var t = this;
         t.d = {
-            a: 3,
-            option: {},
-            url: $AA.u.automationEmails,
             parentName: 'emails'
         };
         t.init();
 
-        if (typeof obj !== 'undefined') {
-            t.initParameter(obj);
-        }
+        t.initParameter(obj || {});
     };
 
     var p = AutomationEmails.prototype;
@@ -41,7 +37,9 @@ define([
     };
 
 
-
-    $AA.initBasicFunctions(AutomationEmails, "AutomationEmails");
+    $AA.initBasicFunctions(AutomationEmails, "AutomationEmails", {
+        url:'automations/emails',
+        useBaseUrl:true
+    });
 
 });

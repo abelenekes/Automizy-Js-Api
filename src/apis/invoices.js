@@ -4,22 +4,19 @@ define([
     'automizyApi/functions/initBasicFunctions',
     'automizyApi/token'
 ], function () {
-    var UnbounceForms = function (obj) {
+    var Invoices = function (obj) {
         var t = this;
-        t.d = {
-            hasEmbedded:false
-        };
         t.init();
 
         t.initParameter(obj || {});
     };
 
 
-    var p = UnbounceForms.prototype;
+    var p = Invoices.prototype;
 
     
-    $AA.initBasicFunctions(UnbounceForms, "UnbounceForms", {
-        url:'external/unbounce/forms',
+    $AA.initBasicFunctions(Invoices, "Invoices", {
+        url:'invoices',
         useBaseUrl:true
     });
 
