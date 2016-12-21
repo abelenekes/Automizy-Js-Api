@@ -114,7 +114,8 @@ define([
             url: $AA.refreshUrl(),
             data: {
                 refresh_token: $AA.cookie.get('AutomizyApiRefreshToken'),
-                username: $AA.cookie.get('AutomizyApiUsername')
+                username: $AA.cookie.get('AutomizyApiUsername'),
+                admin:($AA.cookie.get('automizyAdminUser') == 1)
             },
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
