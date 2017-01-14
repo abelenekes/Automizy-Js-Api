@@ -15,6 +15,7 @@ define([
     var p = Users.prototype;
 
     p.switch = function(site){
+        var t = this;
         return $.ajax({
             url: t.url() + '/switch-site',
             type: 'POST',

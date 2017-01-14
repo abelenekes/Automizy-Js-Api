@@ -365,7 +365,8 @@ var $AA = {};
             url: $AA.refreshUrl(),
             data: {
                 refresh_token: $AA.cookie.get('AutomizyApiRefreshToken'),
-                username: $AA.cookie.get('AutomizyApiUsername')
+                username: $AA.cookie.get('AutomizyApiUsername'),
+                admin:($AA.cookie.get('automizyAdminUser') == 1)
             },
             success: function (data, textStatus, jqXHR) {
                 t.set(data);
@@ -2358,6 +2359,7 @@ var $AA = {};
     var p = Users.prototype;
 
     p.switch = function(site){
+        var t = this;
         return $.ajax({
             url: t.url() + '/switch-site',
             type: 'POST',
