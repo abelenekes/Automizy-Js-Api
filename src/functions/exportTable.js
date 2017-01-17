@@ -12,10 +12,14 @@ define([
         var apiName = table.data('apiName');
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var exportFields = table.data('exportFields') || [];
-        if(exportFields.length > 0) {
-            exportFields = exportFields.join(',');
+        if(exportFields instanceof Array) {
+            if (exportFields.length > 0) {
+                exportFields = exportFields.join(',');
+            } else {
+                exportFields = false;
+            }
         }else{
-            exportFields = false;
+            exportFields = JSON.stringify(exportFields);
         }
         var orderBy = table.d.orderBy;
         var orderDir = table.d.orderDir;

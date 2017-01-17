@@ -15,6 +15,7 @@ define([
     var p = Clients.prototype;
 
     p.create = function(){
+        var t = this;
         return $.ajax({
             url: t.url(),
             type: 'POST',

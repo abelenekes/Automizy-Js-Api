@@ -42,43 +42,6 @@ var $AA = {};
         var loginApiUrl = window.automizyApiLoginPhp || window.AutomizyLoginApiUrl || "https://login.automizy.com/api/login.php";
         var refreshApiUrl = window.automizyApiRefreshPhp || window.AutomizyRefreshApiUrl || "https://login.automizy.com/api/refresh.php";
 
-        t.u = {
-            //base:baseApiUrl,
-            //loginPhp: loginApiUrl,
-            //refreshPhp: refreshApiUrl,
-            //oauth: baseUrl + '/oauth',
-            //segments: baseUrl + '/segments',
-            //campaigns: baseUrl + '/campaigns',
-            //splitTests: baseUrl + '/split-tests',
-            //newsletters: baseUrl + '/newsletters',
-            //automationEmails: baseUrl + '/automations/emails',
-            //contacts: baseUrl + '/contacts',
-            //contactTags: baseUrl + '/contacts/tags',
-            //contactsTagManager: baseUrl + '/contacts/tag-manager',
-            //customFields: baseUrl + '/custom-fields',
-            //users: baseUrl + '/users',
-            //jobs: baseUrl + '/jobs',
-            //webhooks: baseUrl + '/webhooks',
-            //images: baseUrl + '/images',
-            //templates: baseUrl + '/templates',
-            //forms: baseUrl + '/forms',
-            //automations: baseUrl + '/automations',
-            //account: baseUrl + '/account',
-            //accountStatistics: baseUrl + '/account/statistics',
-            //contactImports: baseUrl + '/contact-imports',
-            //tags: baseUrl + '/tags',
-            //clients: baseUrl + '/clients',
-            //updates: baseUrl + '/updates',
-            //plugins: baseUrl + '/plugins',
-            //milestones: baseUrl + '/milestones',
-            //leadScores: baseUrl + '/lead-scores',
-            //unbounceForms: baseUrl + '/external/unbounce/forms',
-            //autoDetectedForms: baseUrl + '/forms/autodetect',
-            //invoices: baseUrl + '/invoices',
-
-            //emailPreview: baseUrl + '/email-preview'
-        };
-
         t.m = [];
     }();
 })();
@@ -2300,6 +2263,669 @@ var $AA = {};
 })();
 
 (function(){
+    var TransactionalEmails = function (obj) {
+        var t = this;
+        t.d = {
+            parentName: 'transactionalEmails'
+        };
+        t.init();
+
+        t.initParameter(obj || {});
+    };
+
+    var p = TransactionalEmails.prototype;
+
+    p.copy = function (id, data, done) {
+        var t = this;
+        var data = data || {};
+        data.copyData = data.copyData || {};
+        var done = done || function(){};
+        return t.getRecordById(id).done(function(getData){
+            var insertData = {
+                name:data.name || ((data.copyData.prefix || '') + getData.name + (data.copyData.suffix || '')),
+                subject:data.subject || getData.subject,
+                editorCode:data.editorCode || getData.editorCode,
+                htmlCode:data.htmlCode || getData.htmlCode,
+                maxWidth:data.maxWidth || getData.maxWidth,
+                tags:data.tags || getData.tags
+            };
+            return t.insert(insertData).done(function(localData){
+                done.apply(t, [localData]);
+            });
+        });
+    };
+
+
+
+    $AA.initBasicFunctions(TransactionalEmails, "TransactionalEmails", {
+        url:'transactional',
+        useBaseUrl:true
+    });
+
+})();
+
+(function(){
+    var Transactional = function (obj) {
+        var t = this;
+        t.d = {
+            parentName: 'transactionalEmails'
+        };
+        t.init();
+
+        t.initParameter(obj || {});
+    };
+
+
+    var p = Transactional.prototype;
+
+    p.getOpenStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'total'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'total'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getShareStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'total'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/shares' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getUnsubscribeStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'total'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/unsubscribes' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getBounceStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'total'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/bounces' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getGeoStatById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'raw'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/geo-locations' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof step !== 'undefined' && step !== false){
+            data.step = step;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof step !== 'undefined' && step !== false){
+            data.step = step;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenDevicePieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'device'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickDevicePieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'device'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenDeviceTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'device'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickDeviceTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'device'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenOsPieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'os'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickOsPieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'os'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenOsTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'os'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickOsTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'os'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenBrowserPieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'browser'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickBrowserPieById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'browser'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenBrowserTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'browser'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickBrowserTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'browser'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getDomainTopListById = function (id, from, to, limit) {
+        var t = this;
+        var data = {
+            format:'raw'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/domains' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenDomainListById = p.getOpenDomainPieById = function(id, from, to, limit, uniqueContacts){
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'domain'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        if(typeof uniqueContacts !== 'undefined' && uniqueContacts !== false){
+            data.uniqueContacts = uniqueContacts;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickDomainListById = p.getClickDomainPieById = function (id, from, to, limit, uniqueContacts) {
+        var t = this;
+        var data = {
+            format:'aggregate',
+            groupBy:'domain'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        if(typeof limit !== 'undefined' && limit !== false){
+            data.limit = limit;
+        }
+        if(typeof uniqueContacts !== 'undefined' && uniqueContacts !== false){
+            data.uniqueContacts = uniqueContacts;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getOpenDomainTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'domain'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/opens' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getClickDomainTimeLineById = function (id, from, to, step) {
+        var t = this;
+        var data = {
+            format:'timeline',
+            groupBy:'domain'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/clicks' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getHeatMapById = function (id, from, to) {
+        var t = this;
+        var data = {
+            format:'raw'
+        };
+        if(typeof from !== 'undefined' && from !== false){
+            data.from = from;
+        }
+        if(typeof to !== 'undefined' && to !== false){
+            data.to = to;
+        }
+        return $.ajax({
+            url: t.url() + '/' + id + '/heat-map' + t.d.urlSuffix,
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getLinksById = function (id) {
+        var t = this;
+        return $.ajax({
+            url: t.url() + '/' + id + '/links',
+            type: 'GET',
+            dataType: 'json',
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getCombinedById = function (id, data) {
+        var t = this;
+        return $.ajax({
+            url: t.url() + '/' + id + '/combined',
+            type: 'POST',
+            dataType: 'json',
+            data:data,
+            headers: {Authorization: 'Bearer ' + $AA.token().get()},
+            error: $AA.token().error()
+        });
+    };
+    p.getStatisticsToPdfById = function (id) {
+        var t = this;
+        return $.ajax({
+            url: t.url() + '/' + id,
+            type: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + $AA.token().get(),
+                Accept: 'application/pdf'
+            },
+            error: $AA.token().error()
+        });
+    };
+    p.send = function(data){
+        var t = this;
+        return $.ajax({
+            type: "POST",
+            url: t.url() + "/send",
+            headers: {"Authorization": 'Bearer ' + $AA.token().get()},
+            data: data
+        })
+    };
+    
+    $AA.initBasicFunctions(Transactional, "Transactional", {
+        url:'transactional',
+        useBaseUrl:true
+    });
+
+})();
+
+(function(){
     var Contacts = function (obj) {
         var t = this;
         t.init();
@@ -2912,6 +3538,7 @@ var $AA = {};
     var p = Clients.prototype;
 
     p.create = function(){
+        var t = this;
         return $.ajax({
             url: t.url(),
             type: 'POST',
@@ -3225,10 +3852,14 @@ var $AA = {};
         var apiName = table.data('apiName');
         var apiUrlSuffix = table.data('apiUrlSuffix');
         var exportFields = table.data('exportFields') || [];
-        if(exportFields.length > 0) {
-            exportFields = exportFields.join(',');
+        if(exportFields instanceof Array) {
+            if (exportFields.length > 0) {
+                exportFields = exportFields.join(',');
+            } else {
+                exportFields = false;
+            }
         }else{
-            exportFields = false;
+            exportFields = JSON.stringify(exportFields);
         }
         var orderBy = table.d.orderBy;
         var orderDir = table.d.orderDir;

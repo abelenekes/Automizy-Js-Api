@@ -13,6 +13,8 @@ define([
     "automizyApi/apis/splitTests",
     "automizyApi/apis/newsletters",
     "automizyApi/apis/automationEmails",
+    "automizyApi/apis/transactionalEmails",
+    "automizyApi/apis/transactional",
     "automizyApi/apis/contacts",
     "automizyApi/apis/customFields",
     "automizyApi/apis/users",
