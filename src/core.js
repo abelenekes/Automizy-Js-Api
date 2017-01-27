@@ -5,6 +5,7 @@ define([
         var t = this;
         t.xhr = {};
         t.url = {};
+        t.events = {};
         t.d = {
             version: '0.1.0',
             login:false,

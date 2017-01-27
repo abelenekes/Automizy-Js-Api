@@ -49,7 +49,9 @@ define([
     "automizyApi/functions/dataToOptions",
     "automizyApi/functions/convertToObj",
     "automizyApi/functions/urlManager",
-    "automizyApi/functions/downloadContent"
+    "automizyApi/functions/downloadContent",
+    "automizyApi/functions/addEvent",
+    "automizyApi/functions/runEvents"
 ], function () {
     $AA.createUrl('account')('account', true);
     console.log('%c AutomizyJsApi module loaded! ', 'background: #000000; color: #bada55; font-size:14px');

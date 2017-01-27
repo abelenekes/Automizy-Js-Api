@@ -9,8 +9,9 @@ define([
             return false;
         }
         var moduleName = moduleName || false;
-        if (moduleName === false)
+        if (moduleName === false) {
             return false;
+        }
         var moduleNameLower = moduleName.toLowerCase();
         var moduleNameLowerFirst = moduleName.charAt(0).toLowerCase() + moduleName.slice(1);
 
@@ -24,6 +25,7 @@ define([
 
                 t.d = t.d || {};
                 t.d.option = t.d.option || {};
+                t.d.events = t.d.events || {};
                 t.d.xhr = t.d.xhr || {};
                 t.d.xhr.get = false;
                 t.d.xhr.insert = false;
@@ -77,68 +79,96 @@ define([
             };
         p.initParameter = p.initParameter || function (obj) {
                 var t = this;
-                if (typeof obj.urlSuffix !== 'undefined')
+                if (typeof obj.urlSuffix !== 'undefined') {
                     t.urlSuffix(obj.urlSuffix);
-                if (typeof obj.itemsDir !== 'undefined')
+                }
+                if (typeof obj.itemsDir !== 'undefined') {
                     t.itemsDir(obj.itemsDir);
-                if (typeof obj.format !== 'undefined')
+                }
+                if (typeof obj.format !== 'undefined') {
                     t.format(obj.format);
-                if (typeof obj.fields !== 'undefined')
+                }
+                if (typeof obj.fields !== 'undefined') {
                     t.fields(obj.fields);
-                if (typeof obj.limit !== 'undefined')
+                }
+                if (typeof obj.limit !== 'undefined') {
                     t.limit(obj.limit);
-                if (typeof obj.page !== 'undefined')
+                }
+                if (typeof obj.page !== 'undefined') {
                     t.page(obj.page);
-                if (typeof obj.orderBy !== 'undefined' || typeof obj.order_by !== 'undefined')
+                }
+                if (typeof obj.orderBy !== 'undefined' || typeof obj.order_by !== 'undefined') {
                     t.orderBy(obj.orderBy || obj.order_by);
-                if (typeof obj.orderDir !== 'undefined' || typeof obj.order_dir !== 'undefined')
+                }
+                if (typeof obj.orderDir !== 'undefined' || typeof obj.order_dir !== 'undefined') {
                     t.orderDir(obj.orderDir || obj.order_dir);
-                if (typeof obj.order !== 'undefined')
+                }
+                if (typeof obj.order !== 'undefined') {
                     t.order(obj.order);
-                if (typeof obj.links !== 'undefined')
+                }
+                if (typeof obj.links !== 'undefined') {
                     t.links(obj.links);
+                }
             };
 
         p.setOptions = p.setOptions || function (obj) {
-                if (typeof obj.fields !== 'undefined')
-                    t.d.option.fields = obj.fields;  //mezők vesszővel
-                if (typeof obj.format !== 'undefined')
-                    t.d.option.format = obj.format; //format data
-                if (typeof obj.limit !== 'undefined')
-                    t.d.option.limit = obj.limit; //hány darab
-                if (typeof obj.page !== 'undefined')
-                    t.d.option.page = obj.page;  //hanyadik elemtől
-                if (typeof obj.where !== 'undefined')
-                    t.d.option.where = obj.where;  //feltétel
-                if (typeof obj.order_by !== 'undefined')
-                    t.d.option.order_by = obj.order_by; //mi szerint rendezzen
-                if (typeof obj.order_dir !== 'undefined')
-                    t.d.option.order_dir = obj.order_dir; //desc vagy asc
-                if (typeof obj.order !== 'undefined')
-                    t.d.option.order = obj.order; //name:desc
-                if (typeof obj.links !== 'undefined')
-                    t.d.option.links = obj.links; //milyen linkek kellenek vesszővel
+                if (typeof obj.fields !== 'undefined') {
+                    t.d.option.fields = obj.fields;
+                }  //mezők vesszővel
+                if (typeof obj.format !== 'undefined') {
+                    t.d.option.format = obj.format;
+                } //format data
+                if (typeof obj.limit !== 'undefined') {
+                    t.d.option.limit = obj.limit;
+                } //hány darab
+                if (typeof obj.page !== 'undefined') {
+                    t.d.option.page = obj.page;
+                }  //hanyadik elemtől
+                if (typeof obj.where !== 'undefined') {
+                    t.d.option.where = obj.where;
+                }  //feltétel
+                if (typeof obj.order_by !== 'undefined') {
+                    t.d.option.order_by = obj.order_by;
+                } //mi szerint rendezzen
+                if (typeof obj.order_dir !== 'undefined') {
+                    t.d.option.order_dir = obj.order_dir;
+                } //desc vagy asc
+                if (typeof obj.order !== 'undefined') {
+                    t.d.option.order = obj.order;
+                } //name:desc
+                if (typeof obj.links !== 'undefined') {
+                    t.d.option.links = obj.links;
+                } //milyen linkek kellenek vesszővel
             };
         p.getDataFromParameter = p.getDataFromParameter || function (obj) {
                 var data = {};
-                if (obj.fields !== false)
+                if (obj.fields !== false) {
                     data.fields = obj.fields;
-                if (obj.format !== false)
+                }
+                if (obj.format !== false) {
                     data.format = obj.format;
-                if (obj.limit !== false)
+                }
+                if (obj.limit !== false) {
                     data.limit = obj.limit;
-                if (obj.page !== false)
+                }
+                if (obj.page !== false) {
                     data.page = obj.page;
-                if (obj.where !== false)
+                }
+                if (obj.where !== false) {
                     data.where = obj.where;
-                if (obj.order_dir !== false)
+                }
+                if (obj.order_dir !== false) {
                     data.order_dir = obj.order_dir;
-                if (obj.order_by !== false)
+                }
+                if (obj.order_by !== false) {
                     data.order_by = obj.order_by;
-                if (obj.order !== false)
+                }
+                if (obj.order !== false) {
                     data.order = obj.order;
-                if (obj.links !== false)
+                }
+                if (obj.links !== false) {
                     data.links = obj.links;
+                }
                 return data;
             };
 
@@ -273,6 +303,7 @@ define([
                     headers: {Authorization: 'Bearer ' + $AA.token().get()},
                     error: $AA.token().error()
                 });
+                $AA.runEvents('insert', t, [t, moduleNameLowerFirst]);
                 if (!async) {
                     return t.d.xhr.insert.responseJSON;
                 }
@@ -513,7 +544,9 @@ define([
         p.orderBy = p.order_by = p.orderBy || p.order_by || function (order_by) {
                 var t = this;
                 if (typeof order_by !== 'undefined') {
-                    if (order_by === false)return t;
+                    if (order_by === false) {
+                        return t;
+                    }
                     t.d.option.order_by = order_by;
                     return t;
                 }
@@ -522,7 +555,9 @@ define([
         p.orderDir = p.order_dir = p.orderDir || p.order_dir || function (order_dir) {
                 var t = this;
                 if (typeof order_dir !== 'undefined') {
-                    if (order_dir === false)return t;
+                    if (order_dir === false) {
+                        return t;
+                    }
                     t.d.option.order_dir = order_dir;
                     return t;
                 }
@@ -531,7 +566,9 @@ define([
         p.order = p.order || function (order) {
                 var t = this;
                 if (typeof order !== 'undefined') {
-                    if (order === false)return t;
+                    if (order === false) {
+                        return t;
+                    }
                     t.d.option.order = order;
                     return t;
                 }
@@ -559,8 +596,8 @@ define([
                 }
                 return t.d.option.set;
             };
-        p.url = p.url || function(){
-                return $AA[moduleNameLowerFirst+'Url'].apply(this, arguments);
+        p.url = p.url || function () {
+                return $AA[moduleNameLowerFirst + 'Url'].apply(this, arguments);
             };
 
 
@@ -579,60 +616,60 @@ define([
         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
         $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = false;
         $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
-        $AA['refresh'+moduleName+'DefaultOptions'] = {};
-        $AA['refresh'+moduleName] = function (defaultOptions) {
+        $AA['refresh' + moduleName + 'DefaultOptions'] = {};
+        $AA['refresh' + moduleName] = function (defaultOptions) {
 
-            var options = defaultOptions || $AA['refresh'+moduleName+'DefaultOptions'];
-            $AA['refresh'+moduleName+'DefaultOptions'] = options;
+            var options = defaultOptions || $AA['refresh' + moduleName + 'DefaultOptions'];
+            $AA['refresh' + moduleName + 'DefaultOptions'] = options;
             var newModule = $AA[moduleNameLowerFirst](options);
 
             $AA.xhr[moduleNameLowerFirst + 'Running'] = true;
             $AA.xhr[moduleNameLowerFirst] = newModule.limit(2147483648).get().done(function (data) {
                 $AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] = true;
                 $AA.xhr[moduleNameLowerFirst + 'Running'] = false;
-                if(newModule.d.hasEmbedded){
+                if (newModule.d.hasEmbedded) {
                     var arr = data._embedded[newModule.d.parentName];
-                }else {
+                } else {
                     var arr = data;
                 }
 
                 for (var i = 0; i < arr.length; i++) {
-                    if(newModule.d.hasId) {
+                    if (newModule.d.hasId) {
                         $AA.d.data[moduleNameLowerFirst][arr[i].id] = arr[i];
-                    }else{
+                    } else {
                         $AA.d.data[moduleNameLowerFirst][arr[i]] = arr[i];
                     }
                 }
             });
             return $AA.xhr[moduleNameLowerFirst];
         };
-        $AA['get'+moduleName] = function (options) {
-            if($AA.xhr[moduleNameLowerFirst + 'Modified'] === true && $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] === true){
+        $AA['get' + moduleName] = function (options) {
+            if ($AA.xhr[moduleNameLowerFirst + 'Modified'] === true && $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] === true) {
                 $AA.xhr[moduleNameLowerFirst + 'GetAfterFirstModified'] = false;
-                if(typeof options !== 'undefined'){
-                    return $AA['refresh'+moduleName](options).done(function(){
+                if (typeof options !== 'undefined') {
+                    return $AA['refresh' + moduleName](options).done(function () {
                         $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
                         $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                     });
                 }
-                return $AA['refresh'+moduleName]().done(function(){
+                return $AA['refresh' + moduleName]().done(function () {
                     $AA.xhr[moduleNameLowerFirst + 'Modified'] = false;
                     $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
-            if($AA.xhr[moduleNameLowerFirst + 'GetRunning']){
+            if ($AA.xhr[moduleNameLowerFirst + 'GetRunning']) {
                 return $AA.xhr[moduleNameLowerFirst];
             }
             $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = true;
-            if($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined'){
+            if ($AA.xhr[moduleNameLowerFirst + 'FirstRunCompleted'] === true && typeof options === 'undefined') {
                 return $AA.xhr[moduleNameLowerFirst];
             }
-            if(typeof options !== 'undefined'){
-                return $AA['refresh'+moduleName](options).done(function(){
+            if (typeof options !== 'undefined') {
+                return $AA['refresh' + moduleName](options).done(function () {
                     $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
                 });
             }
-            return $AA['refresh'+moduleName]().done(function(){
+            return $AA['refresh' + moduleName]().done(function () {
                 $AA.xhr[moduleNameLowerFirst + 'GetRunning'] = false;
             });
         };

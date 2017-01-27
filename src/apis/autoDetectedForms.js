@@ -7,7 +7,7 @@ define([
     var AutoDetectedForms = function (obj) {
         var t = this;
         t.d = {
-            hasEmbedded:false
+            parentName: 'forms'
         };
         t.init();
 
